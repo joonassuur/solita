@@ -11,7 +11,7 @@ function Main() {
   const products = useSelector(getProducts);
   const cart = useSelector(getCart);
 
-  return <div id="main">{StoreItems(products, cart)}</div>;
+  return <div id="main">{StoreItems()}</div>;
 }
 
 export default Main;

@@ -1,3 +1,8 @@
-export { fetchStoreData, addToCart, removeFromCart } from "./AppActions";
+export {
+  fetchStoreData,
+  modifyCart,
+  removeFromCart,
+  setCartQuantity,
+} from "./AppActions";
 
-export { getProducts, getCart } from "./Selectors";
+export { getProducts, getCart, getCartQuantity } from "./Selectors";

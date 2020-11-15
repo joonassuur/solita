@@ -1,49 +1,88 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { addToCart, removeFromCart } from "../../redux/Index";
-import { StoreItem } from "../../types/Types";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import {
+  modifyCart,
+  getCartQuantity,
+  getCart,
+  getProducts,
+} from "../../redux/Index";
+import { StoreItem, Cart } from "../../types/Types";
+import _ from "lodash";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import "./StoreItems.scss";
 
-function StoreItems(products: StoreItem[], cart: StoreItem[]) {
-
+function StoreItems() {
+  const location = useLocation();
+  const route = location.pathname;
   const dispatch = useDispatch();
+  const cart = useSelector(getCart);
+  const products = useSelector(getProducts);
+  const cartQuantity = useSelector(getCartQuantity);
+  const notify = (str: string) => toast(str);
 
   const addOrRemoveItem = (i: StoreItem) => {
-    // if item exists in cart, remove it, otherwise add to cart
-    if (cart.some((x: StoreItem) => x.id === i.id)) {
-      dispatch(removeFromCart(i));
+    const filter: Cart[] = cart.filter((l) => l.id === i.id);
+    let copy = _.cloneDeep(filter[0]);
+
+    if (route === "/cart") {
+      copy.quantity -= 1;
+      notify("Item removed from cart");
     } else {
-      dispatch(addToCart(i));
+      copy.quantity += 1;
+      notify("Item added to cart");
     }
+    dispatch(modifyCart(copy));
   };
-  
-  return (
-    <>
-      {products.map((e: StoreItem) => {
-        return (
-          <div key={e.id} className="storeItem">
-            <div className="left">
-              <div className={`image ${e.name.toLowerCase()}`}></div>
-              <div className="name-desc">
-                <h1 id="product-name">{e.name}</h1>
-                <div>{e.description}</div>
-              </div>
-            </div>
-            <div className="right">
-              <div className="price-btn">
-                <h1 id="product-price">{`${e.price} €`}</h1>
-                <button onClick={() => addOrRemoveItem(e)}>
-                  {cart.some((x: StoreItem) => x.id === e.id)
-                    ? "Remove from cart"
-                    : "Add to cart"}
-                </button>
-              </div>
-            </div>
+
+  const renderItemList = (e: StoreItem, quantity?: number) => {
+    // render cart / product list
+    return (
+      <div key={e.id} className="storeItem">
+        <div className="left">
+          <div className={`image ${e.name.toLowerCase()}`}></div>
+          <div className="name-desc">
+            <h1 id="product-name">{e.name}</h1>
+            <div>{e.description}</div>
           </div>
-        );
+        </div>
+        <div className="right">
+          <div className="price-btn-qty">
+            <h1 id="product-price">{`${e.price} €`}</h1>
+            {route === "/cart" && (
+              <h3 id="product-quantity">{`Quantity: ${quantity}`}</h3>
+            )}
+            <button id="addRemove-btn" onClick={() => addOrRemoveItem(e)}>
+              {route === "/cart" ? "Remove from cart" : "Add to cart"}
+            </button>
+          </div>
+          <ToastContainer hideProgressBar={false} autoClose={2000} pauseOnFocusLoss={false} />
+        </div>
+      </div>
+    );
+  };
+
+  return (route === "/cart" && cartQuantity > 0) || route === "/" ? (
+    <>
+      {products.map((product: StoreItem) => {
+        if (route === "/cart") {
+          return cart.map((cartItem) => {
+            return (
+              // render only items that are in cart
+              product.id === cartItem.id &&
+              cartItem.quantity > 0 &&
+              renderItemList(product, cartItem.quantity)
+            );
+          });
+        } else {
+          return renderItemList(product);
+        }
       })}
     </>
+  ) : (
+    <h2>No items in cart</h2>
   );
 }
 

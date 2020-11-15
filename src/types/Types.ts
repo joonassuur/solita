@@ -6,5 +6,14 @@ export interface StoreItem {
 }
 export interface Store {
   products: StoreItem[];
-  cart: StoreItem[];
+  cart: [
+    { id: number; quantity: number },
+    { id: number; quantity: number },
+    { id: number; quantity: number }
+  ];
+  cartQuantity: number;
+}
+export interface Cart {
+  id: number;
+  quantity: number;
 }

@@ -3,6 +3,21 @@
 #cart-content .storeItem {
   border-bottom: 1px solid black;
 }
+#product-price {
+  font-weight: 400;
+  text-align: right;
+}
+#product-quantity {
+  text-align: right;
+  font-weight: 400;
+  margin-bottom: 0.5em;
+}
+#product-name {
+  font-style: italic;
+}
+#addRemove-btn {
+  margin-top: 0.5em;
+}
 .storeItem {
   display: flex;
   padding: 2em 0;
@@ -93,6 +108,9 @@
     }
     #product-price {
       margin-top: .5em;
+    }
+    #product-price,
+    #product-quantity {
       text-align: left;
     }
   }
