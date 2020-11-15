@@ -77,25 +77,27 @@
     }
     &.circle:before {
       content: '';
-      border-radius: 50px;
+      border-radius: 100px;
       position: absolute;
       top: 0;
       left: 50%;
       transform: translateX(-50%);
       border-left: 40px solid palevioletred;
       border-right: 40px solid palevioletred;
-      border-bottom: 80px solid palevioletred;
+      border-bottom: 40px solid palevioletred;
+      border-top: 40px solid palevioletred;
     }
     &.circle:after {
       content: '';
-      border-radius: 50px;
+      border-radius: 100px;
       position: absolute;
       top: 2px;
       left: 50%;
       transform: translateX(-50%);
       border-left: 38px solid white;
       border-right: 38px solid white;
-      border-bottom: 76px solid white;
+      border-bottom: 38px solid white;
+      border-top: 38px solid white;
     }
   }
 }
