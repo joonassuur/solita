@@ -1,0 +1,14 @@
+#cart-content {
+  padding: 2em;
+  padding-top: 1em;
+  border: 1px solid black;
+}
+#backToStoreBtn {
+  margin-top: 1em;
+}
+#total-amount {
+  display: flex;
+  justify-content: flex-end;
+  font-weight: 400;
+  margin: 1em 0;
+}

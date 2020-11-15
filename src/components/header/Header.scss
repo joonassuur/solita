@@ -1,0 +1,55 @@
+@import "../../variables.scss";
+
+#header-container {
+  position: relative;
+  overflow: hidden;
+  #header {
+    display: flex;
+    padding: 1em 1em 4em;
+    background: #e9e9e9;
+    justify-content: space-between;
+    .description,
+    .right .cart {
+      font-style: italic;
+    }
+    .logo {
+      font-family: "Pacifico", sans-serif;
+      font-size: 4em;
+      line-height: 1em;
+      margin-right: 0.5em;
+    }
+    .left,
+    .right {
+      align-items: center;
+      display: flex;
+      .cart-icon {
+        cursor: pointer;
+        margin-left: 1em;
+      }
+      .cart-icon span {
+        background: #000;
+        color: #fff;
+        border-radius: 50px;
+        padding: 8px;
+      }
+    }
+  }
+  #triangles-container {
+    position: relative;
+    .triangle {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      border-left: 25px solid transparent;
+      border-right: 25px solid transparent;
+      border-bottom: 30px solid #fff;
+    }
+  }
+}
+
+@media (max-width: $md) {
+  .description {
+    display: none;
+  }
+}

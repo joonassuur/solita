@@ -1,0 +1,99 @@
+@import '../../variables.scss';
+
+#cart-content .storeItem {
+  border-bottom: 1px solid black;
+}
+.storeItem {
+  display: flex;
+  padding: 2em 0;
+  justify-content: space-between;
+  .left,
+  .right {
+    align-items: center;
+    display: flex;
+  }
+  .image {
+    position: relative;
+    display: flex;
+    align-items: center;
+    left: 0;
+    height: 80px;
+    width: 80px;
+    margin-right: 2em;
+    &.triangle:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 40px solid transparent;
+      border-right: 40px solid transparent;
+      border-bottom: 80px solid palevioletred;
+    }
+    &.triangle:after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 37px solid transparent;
+      border-right: 37px solid transparent;
+      border-bottom: 75px solid #fff;
+    }
+    &.rectangle:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 40px solid palevioletred;
+      border-right: 40px solid palevioletred;
+      border-bottom: 80px solid palevioletred;
+    }
+    &.rectangle:after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 38px solid white;
+      border-right: 38px solid white;
+      border-bottom: 76px solid white;
+    }
+    &.circle:before {
+      content: '';
+      border-radius: 50px;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 40px solid palevioletred;
+      border-right: 40px solid palevioletred;
+      border-bottom: 80px solid palevioletred;
+    }
+    &.circle:after {
+      content: '';
+      border-radius: 50px;
+      position: absolute;
+      top: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 38px solid white;
+      border-right: 38px solid white;
+      border-bottom: 76px solid white;
+    }
+  }
+}
+
+@media (max-width: $md) {
+  .storeItem {
+    flex-direction: column;
+    .image {
+      display: none;
+    }
+    #product-price {
+      margin-top: .5em;
+      text-align: left;
+    }
+  }
+}
