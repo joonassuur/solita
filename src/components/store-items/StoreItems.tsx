@@ -9,9 +9,9 @@ import {
 } from "../../redux/Index";
 import { StoreItem, Cart } from "../../types/Types";
 import _ from "lodash";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
+import "react-toastify/dist/ReactToastify.css";
 import "./StoreItems.scss";
 
 function StoreItems() {
@@ -21,6 +21,7 @@ function StoreItems() {
   const cart = useSelector(getCart);
   const products = useSelector(getProducts);
   const cartQuantity = useSelector(getCartQuantity);
+
   const notify = (str: string) => toast(str);
 
   const addOrRemoveItem = (i: StoreItem) => {
@@ -58,7 +59,6 @@ function StoreItems() {
               {route === "/cart" ? "Remove from cart" : "Add to cart"}
             </button>
           </div>
-          <ToastContainer hideProgressBar={false} autoClose={2000} pauseOnFocusLoss={false} />
         </div>
       </div>
     );
@@ -70,13 +70,14 @@ function StoreItems() {
         if (route === "/cart") {
           return cart.map((cartItem) => {
             return (
-              // render only items that are in cart
+              // during cart view, render only items that are in cart
               product.id === cartItem.id &&
               cartItem.quantity > 0 &&
               renderItemList(product, cartItem.quantity)
             );
           });
         } else {
+          // render product list
           return renderItemList(product);
         }
       })}

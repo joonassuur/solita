@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getCart, getProducts, getCartQuantity } from "../../redux/Index";
 import { useHistory } from "react-router-dom";
-
 import StoreItems from "../store-items/StoreItems";
 
 import "./Cart.scss";

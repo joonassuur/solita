@@ -56,7 +56,7 @@ function Header() {
         </div>
         <div className="right">
           <div className="cart">
-            {`${cartQuantity > 0 ? cartQuantity : "No"} items in cart`}
+            {`${cartQuantity || "No"} items in cart`}
           </div>
           <div className="cart-icon" onClick={navigateToCart}>
             <span className="material-icons">shopping_cart</span>
