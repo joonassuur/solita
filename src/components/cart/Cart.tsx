@@ -18,7 +18,7 @@ function Cart() {
   };
 
   useEffect(() => {
-    // calculate and show the total amount in euros
+    // calculate and show the total amount of all the items in cart in euros
     const total: number[] = [];
     products.map((e) => {
       cart.map((i) => {
