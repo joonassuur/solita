@@ -29,9 +29,11 @@ function Cart() {
       });
       return false;
     });
-    const reducer = (a: number, c: number) => a + c;
-    const t = total.reduce(reducer);
-    setTotalAmount(t);
+    if (total.length > 0) {
+      const reducer = (a: number, c: number) => a + c;
+      const t = total.reduce(reducer);
+      setTotalAmount(t);
+    }
   }, [cart, products, totalAmount]);
 
   return (
