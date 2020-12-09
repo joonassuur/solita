@@ -10,20 +10,7 @@ import _ from "lodash";
 
 const initialState: Store = {
   products: [],
-  cart: [
-    {
-      id: 1,
-      quantity: 0,
-    },
-    {
-      id: 2,
-      quantity: 0,
-    },
-    {
-      id: 3,
-      quantity: 0,
-    },
-  ],
+  cart: [],
   cartQuantity: 0,
 };
 

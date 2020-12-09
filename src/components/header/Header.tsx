@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getCart, setCartQuantity, getCartQuantity } from "../../redux/Index";
 import { useHistory } from "react-router-dom";
@@ -11,8 +11,6 @@ function Header() {
   const cartQuantity = useSelector(getCartQuantity);
   const dispatch = useDispatch();
 
-  const [width, setWidth] = useState(window.innerWidth);
-
   const navigateToCart = () => {
     history.push("/cart");
   };
@@ -24,10 +22,6 @@ function Header() {
       0
     );
     dispatch(setCartQuantity(total));
-
-    // listen to window size changes to re-calculate triangles
-    const handleResize = () => setWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
   }, [cart, dispatch]);
 
   return (
@@ -49,7 +43,6 @@ function Header() {
           </div>
         </div>
         <div id="triangles-container">
-          {/* {renderTriangles()} */}
           <div className="triangle"></div>
         </div>
       </div>
