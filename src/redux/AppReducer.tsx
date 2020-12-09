@@ -3,7 +3,7 @@ import {
   fetchStoreData,
   addToCart,
   removeFromCart,
-  setCartQuantity,
+  setCartQuantity
 } from "../redux/AppActions";
 import { Store } from "../types/Types";
 import _ from "lodash";
@@ -11,7 +11,7 @@ import _ from "lodash";
 const initialState: Store = {
   products: [],
   cart: [],
-  cartQuantity: 0,
+  cartQuantity: 0
 };
 
 const app = createSlice({
@@ -22,27 +22,27 @@ const app = createSlice({
     [fetchStoreData.fulfilled.toString()]: (state, { payload }) => {
       state.products = payload.products;
     },
-    [fetchStoreData.rejected.toString()]: (state) => {
+    [fetchStoreData.rejected.toString()]: state => {
       return state;
     },
     [addToCart.toString()]: (state, { payload }) => {
-      const copy = _.cloneDeep(state.cart);
-      copy.filter((x) =>
-        x.id === payload.id ? (x.quantity = payload.quantity) : false
+      const clonedCart = _.cloneDeep(state.cart);
+      clonedCart.filter(item =>
+        item.id === payload.id ? (item.quantity = payload.quantity) : false
       );
 
-      state = { ...state, cart: copy };
+      state = { ...state, cart: clonedCart };
       return state;
     },
     [removeFromCart.toString()]: (state, { payload }) => {
-      const removeIndex = state.cart.map((item) => item.id).indexOf(payload.id);
+      const removeIndex = state.cart.map(item => item.id).indexOf(payload.id);
       state.cart.splice(removeIndex, 1);
     },
     [setCartQuantity.toString()]: (state, { payload }) => {
       state = { ...state, cartQuantity: payload };
       return state;
-    },
-  },
+    }
+  }
 });
 
 export default app;
