@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import {
-  modifyCart,
+  addToCart,
   getCartQuantity,
   getCart,
   getProducts,
@@ -24,38 +24,38 @@ function StoreItems() {
 
   const notify = (str: string) => toast(str);
 
-  const addOrRemoveItem = (i: StoreItem) => {
-    const filter: Cart[] = cart.filter((l) => l.id === i.id);
-    let copy = _.cloneDeep(filter[0]);
+  const addOrRemoveItem = (storeItem: StoreItem) => {
+    const cartFilter: Cart[] = cart.filter((cartItem) => cartItem.id === storeItem.id);
+    let cartFilterCopy = _.cloneDeep(cartFilter[0]);
 
     if (route === "/cart") {
-      copy.quantity -= 1;
+      cartFilterCopy.quantity -= 1;
       notify("Item removed from cart");
     } else {
-      copy.quantity += 1;
+      cartFilterCopy.quantity += 1;
       notify("Item added to cart");
     }
-    dispatch(modifyCart(copy));
+    dispatch(addToCart(cartFilterCopy));
   };
 
-  const renderItemList = (e: StoreItem, quantity?: number) => {
+  const renderItemList = (item: StoreItem, quantity?: number) => {
     // render cart / product list
     return (
-      <div key={e.id} className="storeItem">
+      <div key={item.id} className="storeItem">
         <div className="left">
-          <div className={`image ${e.name.toLowerCase()}`}></div>
+          <div className={`image ${item.name.toLowerCase()}`}></div>
           <div className="name-desc">
-            <h1 className="product-name">{e.name}</h1>
-            <div>{e.description}</div>
+            <h1 className="product-name">{item.name}</h1>
+            <div>{item.description}</div>
           </div>
         </div>
         <div className="right">
           <div className="price-btn-qty">
-            <h1 className="product-price">{`${e.price} €`}</h1>
+            <h1 className="product-price">{`${item.price} €`}</h1>
             {route === "/cart" && (
               <h3 className="product-quantity">{`Quantity: ${quantity}`}</h3>
             )}
-            <button className="addRemove-btn" onClick={() => addOrRemoveItem(e)}>
+            <button className="addRemove-btn" onClick={() => addOrRemoveItem(item)}>
               {route === "/cart" ? "Remove from cart" : "Add to cart"}
             </button>
           </div>

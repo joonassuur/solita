@@ -8,7 +8,7 @@ export const fetchStoreData = createAsyncThunk(
     return toJson;
   }
 );
-export const modifyCart = createAction("@app: modifyCart", (item) => {
+export const addToCart = createAction("@app: addToCart", (item) => {
   return { payload: item };
 });
 export const removeFromCart = createAction("@app: removeFromCart", (item) => {

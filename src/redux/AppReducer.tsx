@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   fetchStoreData,
-  modifyCart,
+  addToCart,
   removeFromCart,
   setCartQuantity,
 } from "../redux/AppActions";
@@ -25,7 +25,7 @@ const app = createSlice({
     [fetchStoreData.rejected.toString()]: (state) => {
       return state;
     },
-    [modifyCart.toString()]: (state, { payload }) => {
+    [addToCart.toString()]: (state, { payload }) => {
       const copy = _.cloneDeep(state.cart);
       copy.filter((x) =>
         x.id === payload.id ? (x.quantity = payload.quantity) : false

@@ -1,6 +1,6 @@
 export {
   fetchStoreData,
-  modifyCart,
+  addToCart,
   removeFromCart,
   setCartQuantity,
 } from "./AppActions";
