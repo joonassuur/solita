@@ -6,7 +6,6 @@ import {
   setCartQuantity
 } from "../redux/AppActions";
 import { Store } from "../types/Types";
-import _ from "lodash";
 
 const initialState: Store = {
   products: [],
@@ -25,15 +24,16 @@ const app = createSlice({
     [fetchStoreData.rejected.toString()]: state => {
       return state;
     },
-    [addToCart.toString()]: (state, { payload }) => {
-      const clonedCart = _.cloneDeep(state.cart);
-      clonedCart.filter(item =>
-        item.id === payload.id ? (item.quantity = payload.quantity) : false
-      );
-
-      state = { ...state, cart: clonedCart };
-      return state;
-    },
+    [addToCart.toString()]: (state, { payload }) => void({
+        ...state,
+        cart: {
+          ...state.cart,
+          id: state.cart.filter(item =>
+            item.id === payload.id ? (item.quantity = payload.quantity) : false
+          )
+        }
+      
+    }),
     [removeFromCart.toString()]: (state, { payload }) => {
       const removeIndex = state.cart.map(item => item.id).indexOf(payload.id);
       state.cart.splice(removeIndex, 1);
