@@ -45,17 +45,17 @@ function StoreItems() {
         <div className="left">
           <div className={`image ${e.name.toLowerCase()}`}></div>
           <div className="name-desc">
-            <h1 id="product-name">{e.name}</h1>
+            <h1 className="product-name">{e.name}</h1>
             <div>{e.description}</div>
           </div>
         </div>
         <div className="right">
           <div className="price-btn-qty">
-            <h1 id="product-price">{`${e.price} €`}</h1>
+            <h1 className="product-price">{`${e.price} €`}</h1>
             {route === "/cart" && (
-              <h3 id="product-quantity">{`Quantity: ${quantity}`}</h3>
+              <h3 className="product-quantity">{`Quantity: ${quantity}`}</h3>
             )}
-            <button id="addRemove-btn" onClick={() => addOrRemoveItem(e)}>
+            <button className="addRemove-btn" onClick={() => addOrRemoveItem(e)}>
               {route === "/cart" ? "Remove from cart" : "Add to cart"}
             </button>
           </div>

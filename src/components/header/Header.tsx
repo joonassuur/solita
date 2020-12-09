@@ -10,7 +10,7 @@ function Header() {
   const cart = useSelector(getCart);
   const cartQuantity = useSelector(getCartQuantity);
   const dispatch = useDispatch();
-  
+
   const [width, setWidth] = useState(window.innerWidth);
 
   const navigateToCart = () => {
@@ -30,40 +30,29 @@ function Header() {
     window.addEventListener("resize", handleResize);
   }, [cart, dispatch]);
 
-  const renderTriangles = () => {
-    // render triangles at the bottom of header
-    const triangle = [];
-    for (let i = 0; i < Math.ceil(width / 50); i++) {
-      triangle.push(
-        <span
-          key={i}
-          style={{ left: `calc(50px * ${i})` }}
-          className="triangle"
-        ></span>
-      );
-    }
-    return triangle;
-  };
-
   return (
     <div id="header-container">
       <div id="header">
-        <div className="left">
-          <div className="logo">whee</div>
-          <div className="description">
-            The most definitive shape store in the world
+        <div className="container">
+          <div className="left">
+            <div className="logo">whee</div>
+            <div className="description">
+              The most definitive shape store in the world
+            </div>
+          </div>
+          <div className="right">
+            <div className="cart">{`${cartQuantity ||
+              "No"} items in cart`}</div>
+            <div className="cart-icon" onClick={navigateToCart}>
+              <span className="material-icons">shopping_cart</span>
+            </div>
           </div>
         </div>
-        <div className="right">
-          <div className="cart">
-            {`${cartQuantity || "No"} items in cart`}
-          </div>
-          <div className="cart-icon" onClick={navigateToCart}>
-            <span className="material-icons">shopping_cart</span>
-          </div>
+        <div id="triangles-container">
+          {/* {renderTriangles()} */}
+          <div className="triangle"></div>
         </div>
       </div>
-      <div id="triangles-container">{renderTriangles()}</div>
     </div>
   );
 }
