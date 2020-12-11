@@ -12,7 +12,7 @@
     display: flex;
     flex-direction: column;
     padding: 1em 0 0;
-    background: #e9e9e9;
+    background: $bgLight;
     justify-content: space-between;
     .description,
     .right .cart {
@@ -33,8 +33,8 @@
         margin-left: 1em;
       }
       .cart-icon span {
-        background: #000;
-        color: #fff;
+        background: $bgDark;
+        color: $colorLight;
         border-radius: 50px;
         padding: 8px;
       }
@@ -43,12 +43,24 @@
 
   #triangles-container {
     position: relative;
-    background-repeat: repeat-x;
     background-size: contain;
-    background-image: url(./triangle.svg);
-    height: 40px;
-    margin-top: 1.5em;
+    background-image: 
+      linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 1) 50%,
+        rgba(255, 255, 255, 0) 50%
+      ),
+      linear-gradient(
+        -45deg,
+        rgba(255, 255, 255, 1) 50%,
+        rgba(255, 255, 255, 0) 50%
+      );
+    height: 2.5em;
+    margin-top: 2em;
     width: 100%;
+    background-position: bottom center, bottom center;
+    background-size: 2.5em;
+    background-repeat: repeat-x;
   }
 }
 

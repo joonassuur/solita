@@ -19,20 +19,20 @@ function Cart() {
 
   useEffect(() => {
     // calculate and show the total amount of all the items in cart in euros
-    const total: number[] = [];
-    products.map((e) => {
-      cart.map((i) => {
-        if (e.id === i.id) {
-          total.push(e.price * i.quantity);
+    const itemTotal: number[] = [];
+    products.map((product) => {
+      cart.map((cartItem) => {
+        if (product.id === cartItem.id) {
+          itemTotal.push(product.price * cartItem.quantity);
         }
         return false;
       });
       return false;
     });
-    if (total.length > 0) {
-      const reducer = (a: number, c: number) => a + c;
-      const t = total.reduce(reducer);
-      setTotalAmount(t);
+    if (itemTotal.length > 0) {
+      const reducer = (itemTotal1: number, itemTotal2: number) => itemTotal1 + itemTotal2;
+      const calculatedTotal = itemTotal.reduce(reducer);
+      setTotalAmount(calculatedTotal);
     }
   }, [cart, products, totalAmount]);
 
@@ -40,7 +40,7 @@ function Cart() {
     <div id="cart">
       <h1>Cart</h1>
       <div id="cart-content">
-        {StoreItems()}
+        {StoreItems("remove", "Remove from cart")}
         {cartQuantity > 0 && <h1 id="total-amount">Total: {totalAmount} €</h1>}
         <button id="backToStoreBtn" onClick={() => navigateToStore()}>
           Back to store

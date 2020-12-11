@@ -1,7 +1,7 @@
 @import '../../variables.scss';
 
 #cart-content .storeItem {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid $colorDark;
 }
 
 .storeItem {
@@ -54,7 +54,7 @@
       transform: translateX(-50%);
       border-left: 37px solid transparent;
       border-right: 37px solid transparent;
-      border-bottom: 75px solid #fff;
+      border-bottom: 75px solid $colorLight;
     }
     &.rectangle:before {
       content: '';
@@ -72,9 +72,9 @@
       top: 2px;
       left: 50%;
       transform: translateX(-50%);
-      border-left: 38px solid white;
-      border-right: 38px solid white;
-      border-bottom: 76px solid white;
+      border-left: 38px solid $colorLight;
+      border-right: 38px solid $colorLight;
+      border-bottom: 76px solid $colorLight;
     }
     &.circle:before {
       content: '';
@@ -95,10 +95,10 @@
       top: 2px;
       left: 50%;
       transform: translateX(-50%);
-      border-left: 38px solid white;
-      border-right: 38px solid white;
-      border-bottom: 38px solid white;
-      border-top: 38px solid white;
+      border-left: 38px solid $colorLight;
+      border-right: 38px solid $colorLight;
+      border-bottom: 38px solid $colorLight;
+      border-top: 38px solid $colorLight;
     }
   }
 }

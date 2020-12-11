@@ -32,7 +32,6 @@ const app = createSlice({
             item.id === payload.id ? (item.quantity = payload.quantity) : false
           )
         }
-      
     }),
     [removeFromCart.toString()]: (state, { payload }) => {
       const removeIndex = state.cart.map(item => item.id).indexOf(payload.id);

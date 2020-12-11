@@ -17,11 +17,11 @@ function Header() {
 
   useEffect(() => {
     // set total objects in cart
-    const total = Object.values(cart).reduce(
-      (t, { quantity }) => t + quantity,
+    const numberOfCartItems = Object.values(cart).reduce(
+      (product, { quantity }) => product + quantity,
       0
     );
-    dispatch(setCartQuantity(total));
+    dispatch(setCartQuantity(numberOfCartItems));
   }, [cart, dispatch]);
 
   return (
