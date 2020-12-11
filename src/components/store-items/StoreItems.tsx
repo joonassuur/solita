@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
 import {
   addToCart,
   getCartQuantity,
@@ -23,8 +22,6 @@ function StoreItems(
   // buttonText > accepts any string; text to display on "Add to Cart" buttons.
   // renderElement > string "cart" returns a list of cart items, any other string returns products list
 
-  const location = useLocation();
-  const route = location.pathname;
   const dispatch = useDispatch();
   const cart = useSelector(getCart);
   const products = useSelector(getProducts);
@@ -63,7 +60,7 @@ function StoreItems(
         <div className="right">
           <div className="price-btn-qty">
             <h1 className="product-price">{`${product.price} €`}</h1>
-            {route === "/cart" && (
+            {renderElement === "cart" && (
               <h3 className="product-quantity">{`Quantity: ${quantity}`}</h3>
             )}
             <button
