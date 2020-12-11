@@ -78,7 +78,7 @@ function StoreItems(
     );
   };
 
-  const renderReturn = () => {
+  const renderStoreItems = () => {
     if (renderElement === "cart" && cartQuantity < 1) {
       return <h2>No items in cart</h2>;
     }
@@ -101,7 +101,7 @@ function StoreItems(
     });
   };
 
-  return renderReturn();
+  return renderStoreItems();
 }
 
 export default StoreItems;
