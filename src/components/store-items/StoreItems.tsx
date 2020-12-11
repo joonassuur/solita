@@ -19,8 +19,8 @@ function StoreItems(
   buttonText: string,
   renderElement: string
 ) {
-  // cartAction > accepts either "add" or "remove", decide whether the product should be removed or added to cart
-  // buttonText > accepts any string, text to display on "Add to Cart" buttons
+  // cartAction > accepts either "add" or "remove"; decide whether the product should be removed or added to cart
+  // buttonText > accepts any string; text to display on "Add to Cart" buttons.
   // renderElement > string "cart" returns a list of cart items, any other string returns products list
 
   const location = useLocation();

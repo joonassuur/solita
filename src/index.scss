@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap");
+@import "./variables.scss";
+
 * {
   box-sizing: border-box;
 }
@@ -30,12 +32,12 @@ button {
   text-transform: uppercase;
   font-weight: 600;
   padding: .6em 2em;
-  border: 1px solid black;
-  background: white;
+  border: 1px solid $colorDark;
+  background: $colorLight;
 }
 button:hover {
-  background: black;
-  color: white;
+  background: $colorDark;
+  color: $colorLight;
 }
 #main,
 #cart {
