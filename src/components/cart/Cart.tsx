@@ -40,7 +40,7 @@ function Cart() {
     <div id="cart">
       <h1>Cart</h1>
       <div id="cart-content">
-        {StoreItems("remove", "Remove from cart")}
+        {StoreItems("remove", "Remove from cart", "cart")}
         {cartQuantity > 0 && <h1 id="total-amount">Total: {totalAmount} €</h1>}
         <button id="backToStoreBtn" onClick={() => navigateToStore()}>
           Back to store

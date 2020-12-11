@@ -14,9 +14,14 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./StoreItems.scss";
 
-function StoreItems(cartAction: string, buttonText: string) {
-  // cartAction > accepts either "add" or "remove", to decide whether the product should be removed or added to cart
-  // buttonText > text to display on "Add to Cart" buttons
+function StoreItems(
+  cartAction: string,
+  buttonText: string,
+  renderElement: string
+) {
+  // cartAction > accepts either "add" or "remove", decide whether the product should be removed or added to cart
+  // buttonText > accepts any string, text to display on "Add to Cart" buttons
+  // renderElement > string "cart" returns a list of cart items, any other string returns products list
 
   const location = useLocation();
   const route = location.pathname;
@@ -73,27 +78,30 @@ function StoreItems(cartAction: string, buttonText: string) {
     );
   };
 
-  return (route === "/cart" && cartQuantity > 0) || route === "/" ? (
-    <>
-      {products.map((product: StoreItem) => {
-        if (route === "/cart") {
-          return cart.map(cartItem => {
-            return (
-              // during cart view, render only items that are in cart
-              product.id === cartItem.id &&
-              cartItem.quantity > 0 &&
-              renderItemList(product, cartItem.quantity)
-            );
-          });
-        } else {
-          // render product list
-          return renderItemList(product);
-        }
-      })}
-    </>
-  ) : (
-    <h2>No items in cart</h2>
-  );
+  const renderReturn = () => {
+    if (renderElement === "cart" && cartQuantity < 1) {
+      return <h2>No items in cart</h2>;
+    }
+
+    return products.map((product: StoreItem) => {
+      if (renderElement === "cart") {
+        // render cart list
+        return cart.map(cartItem => {
+          return (
+            // during cart view, render only items that are in cart
+            product.id === cartItem.id &&
+            cartItem.quantity > 0 &&
+            renderItemList(product, cartItem.quantity)
+          );
+        });
+      } else {
+        // render product list
+        return renderItemList(product);
+      }
+    });
+  };
+
+  return renderReturn();
 }
 
 export default StoreItems;

@@ -3,7 +3,7 @@ import StoreItems from "../store-items/StoreItems";
 import "./Main.scss";
 
 function Main() {
-  return <div id="main">{StoreItems("add", "Add to cart")}</div>;
+  return <div id="main">{StoreItems("add", "Add to cart", "products")}</div>;
 }
 
 export default Main;
