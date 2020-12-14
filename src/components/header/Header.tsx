@@ -1,28 +1,17 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getCart, setCartQuantity, getCartQuantity } from "../../redux/Index";
+import React from "react";
+import { useSelector } from "react-redux";
+import { getCart } from "../../redux/Index";
 import { useHistory } from "react-router-dom";
 
 import "./Header.scss";
 
 function Header() {
   const history = useHistory();
-  const cart = useSelector(getCart);
-  const cartQuantity = useSelector(getCartQuantity);
-  const dispatch = useDispatch();
+  const { cartQuantity } = useSelector(getCart);
 
   const navigateToCart = () => {
     history.push("/cart");
   };
-
-  useEffect(() => {
-    // set total objects in cart
-    const numberOfCartItems = Object.values(cart).reduce(
-      (product, { quantity }) => product + quantity,
-      0
-    );
-    dispatch(setCartQuantity(numberOfCartItems));
-  }, [cart, dispatch]);
 
   return (
     <div id="header-container">
@@ -35,8 +24,9 @@ function Header() {
             </div>
           </div>
           <div className="right">
-            <div className="cart">{`${cartQuantity ||
-              "No"} items in cart`}</div>
+            <div className="cart">
+              {`${cartQuantity || "No"} items in cart`}
+            </div>
             <div className="cart-icon" onClick={navigateToCart}>
               <span className="material-icons">shopping_cart</span>
             </div>

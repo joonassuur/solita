@@ -1,11 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addToCart,
-  getCartQuantity,
-  getCart,
-  getProducts
-} from "../../redux/Index";
+import { addToCart, getCart, getProducts } from "../../redux/Index";
 import { StoreItem, Cart } from "../../types/Types";
 import _ from "lodash";
 import { toast } from "react-toastify";
@@ -23,9 +18,8 @@ function StoreItems(
   // renderElement > string "cart" returns a list of cart items, any other string returns products list
 
   const dispatch = useDispatch();
-  const cart = useSelector(getCart);
+  const { cart, cartQuantity } = useSelector(getCart);
   const products = useSelector(getProducts);
-  const cartQuantity = useSelector(getCartQuantity);
 
   const notify = (toastString: string) => toast(toastString);
 

@@ -14,6 +14,4 @@ export const addToCart = createAction("@app: addToCart", (item) => {
 export const removeFromCart = createAction("@app: removeFromCart", (item) => {
   return { payload: item };
 });
-export const setCartQuantity = createAction("@app: setCartQuantity", (item) => {
-  return { payload: item };
-});
+

@@ -3,14 +3,12 @@ import {
   fetchStoreData,
   addToCart,
   removeFromCart,
-  setCartQuantity
 } from "../redux/AppActions";
 import { Store } from "../types/Types";
 
 const initialState: Store = {
   products: [],
   cart: [],
-  cartQuantity: 0
 };
 
 const app = createSlice({
@@ -37,10 +35,6 @@ const app = createSlice({
       const removeIndex = state.cart.map(item => item.id).indexOf(payload.id);
       state.cart.splice(removeIndex, 1);
     },
-    [setCartQuantity.toString()]: (state, { payload }) => {
-      state = { ...state, cartQuantity: payload };
-      return state;
-    }
   }
 });
 

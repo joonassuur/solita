@@ -12,5 +12,4 @@ export interface Cart {
 export interface Store {
   products: StoreItem[];
   cart: Cart[];
-  cartQuantity: number;
 }
