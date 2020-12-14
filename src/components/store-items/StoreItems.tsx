@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, getCart, getProducts } from "../../redux/Index";
-import { StoreItem, Cart } from "../../types/Types";
+import { StoreItem, CartItem } from "../../types/Types";
 import _ from "lodash";
 import { toast } from "react-toastify";
 
@@ -24,7 +24,7 @@ function StoreItems(
   const notify = (toastString: string) => toast(toastString);
 
   const addOrRemoveItem = (storeItem: StoreItem) => {
-    const cartFilter: Cart[] = cart.filter(
+    const cartFilter: CartItem[] = cart.filter(
       cartItem => cartItem.id === storeItem.id
     );
     let cartFilterCopy = _.cloneDeep(cartFilter[0]);

@@ -1,14 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  fetchStoreData,
-  addToCart,
-  removeFromCart,
-} from "../redux/AppActions";
+import { fetchStoreData, addToCart, removeFromCart } from "../redux/AppActions";
 import { Store } from "../types/Types";
 
 const initialState: Store = {
   products: [],
-  cart: [],
+  cart: []
 };
 
 const app = createSlice({
@@ -22,7 +18,8 @@ const app = createSlice({
     [fetchStoreData.rejected.toString()]: state => {
       return state;
     },
-    [addToCart.toString()]: (state, { payload }) => void({
+    [addToCart.toString()]: (state, { payload }) =>
+      void {
         ...state,
         cart: {
           ...state.cart,
@@ -30,11 +27,11 @@ const app = createSlice({
             item.id === payload.id ? (item.quantity = payload.quantity) : false
           )
         }
-    }),
+      },
     [removeFromCart.toString()]: (state, { payload }) => {
       const removeIndex = state.cart.map(item => item.id).indexOf(payload.id);
       state.cart.splice(removeIndex, 1);
-    },
+    }
   }
 });
 

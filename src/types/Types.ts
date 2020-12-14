@@ -4,12 +4,12 @@ export interface StoreItem {
   name: string;
   price: number;
 }
-export interface Cart {
+export interface CartItem {
   id: number;
   quantity: number;
 }
 
 export interface Store {
   products: StoreItem[];
-  cart: Cart[];
+  cart: CartItem[];
 }
