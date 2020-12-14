@@ -5,7 +5,7 @@ export const getProducts = (state: { app: { products: StoreItem[] } }) =>
 export const getCart = (state: { app: { cart: Cart[] } }) => {
   const cart = state.app.cart;
   const cartQuantity = Object.values(cart).reduce(
-    (product, { quantity }) => product + quantity,
+    (accumulator, { quantity }) => accumulator + quantity,
     0
   );
   return { cart, cartQuantity };
