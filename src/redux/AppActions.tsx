@@ -1,11 +1,12 @@
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
+import products from '../API/products.json'
 
 export const fetchStoreData = createAsyncThunk(
   "@app: fetchStoreData",
   async () => {
-    const res = await fetch("/api/products");
-    const toJson = await res.json();
-    return toJson;
+    // fake api call
+    const res = products;
+    return res;
   }
 );
 export const addToCart = createAction("@app: addToCart", (item) => {
