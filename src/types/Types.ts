@@ -8,7 +8,6 @@ export interface CartItem {
   id: number;
   quantity: number;
 }
-
 export interface Store {
   products: StoreItem[];
   cart: CartItem[];

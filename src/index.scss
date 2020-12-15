@@ -21,7 +21,7 @@ h4 {
   margin: 0;
 }
 h1 {
-  margin-bottom: .4em;
+  margin-bottom: 0.4em;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -31,7 +31,7 @@ button {
   cursor: pointer;
   text-transform: uppercase;
   font-weight: 600;
-  padding: .6em 2em;
+  padding: 0.6em 2em;
   border: 1px solid $colorDark;
   background: $colorLight;
 }
@@ -46,4 +46,27 @@ button:hover {
   margin: 0 auto;
   padding: 0 1.5em;
   margin-top: 3em;
+}
+
+// triangle shapes that are rendered across the span of the screen
+.triangles::after {
+  content: "";
+  position: relative;
+  background-size: contain;
+  background-image: linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(255, 255, 255, 0) 50%
+    ),
+    linear-gradient(
+      -45deg,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(255, 255, 255, 0) 50%
+    );
+  width: 100%;
+  background-position: bottom center;
+  background-size: 2.5em;
+  margin-top: 1.5em;
+  height: 2.5em;
+  background-repeat: repeat-x;
 }

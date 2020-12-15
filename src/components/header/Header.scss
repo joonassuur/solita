@@ -3,7 +3,7 @@
 #header-container {
   position: relative;
   overflow: hidden;
-  #header {
+  .header {
     .container {
       display: flex;
       padding: 0 1em;
@@ -12,10 +12,10 @@
     display: flex;
     flex-direction: column;
     padding: 1em 0 0;
-    background: $bgLight;
+    background-color: $bgLight;
     justify-content: space-between;
     .description,
-    .right .cart {
+    .cart-display .cart {
       font-style: italic;
     }
     .logo {
@@ -24,8 +24,8 @@
       line-height: 1em;
       margin-right: 0.5em;
     }
-    .left,
-    .right {
+    .store-name,
+    .cart-display {
       align-items: center;
       display: flex;
       .cart-icon {
@@ -39,28 +39,6 @@
         padding: 8px;
       }
     }
-  }
-
-  #triangles-container {
-    position: relative;
-    background-size: contain;
-    background-image: 
-      linear-gradient(
-        45deg,
-        rgba(255, 255, 255, 1) 50%,
-        rgba(255, 255, 255, 0) 50%
-      ),
-      linear-gradient(
-        -45deg,
-        rgba(255, 255, 255, 1) 50%,
-        rgba(255, 255, 255, 0) 50%
-      );
-    height: 2.5em;
-    margin-top: 2em;
-    width: 100%;
-    background-position: bottom center, bottom center;
-    background-size: 2.5em;
-    background-repeat: repeat-x;
   }
 }
 
