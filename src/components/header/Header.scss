@@ -1,9 +1,12 @@
+@import "../../index.scss";
 @import "../../variables.scss";
 
 #header-container {
   position: relative;
   overflow: hidden;
   .header {
+    @extend .triangles;
+    
     .container {
       display: flex;
       padding: 0 1em;

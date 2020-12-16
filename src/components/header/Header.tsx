@@ -9,21 +9,11 @@ function Header({
 }: {
   navigateToCart: React.MouseEventHandler;
 }) {
-  const { cartQuantity, cartTotalCost } = useSelector(getCart);
-
-  const displayCartQuantity = () => {
-    if (cartQuantity === 1) {
-      return `${cartQuantity} item in cart`;
-    }
-    if (cartQuantity > 1) {
-      return `${cartQuantity} items in cart`;
-    }
-    return "No items in cart";
-  };
+  const { cartTotalCost, displayCartQuantity } = useSelector(getCart);
 
   return (
     <div id="header-container">
-      <div className="header triangles">
+      <div className="header">
         <div className="container">
           <div className="store-name">
             <div className="logo">whee</div>
@@ -33,7 +23,7 @@ function Header({
           </div>
           <div className="cart-display">
             <div className="cart">
-              <div className="cart-quantity">{displayCartQuantity()}</div>
+              <div className="cart-quantity">{displayCartQuantity}</div>
               <div className="cart-cost">{`Total: ${cartTotalCost} €`}</div>
             </div>
             <div className="cart-icon" onClick={navigateToCart}>

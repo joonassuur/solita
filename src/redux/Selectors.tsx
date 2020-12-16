@@ -19,23 +19,31 @@ export const getCart = (state: {
 
   // calculate total cost of all items in a cart
   const cartTotalCost: number = (() => {
-    const totalCostReducer = (itemCount: number, itemTotal: number) =>
-      itemCount + itemTotal;
-    const itemTotal: number[] = [];
-    products.map(product => {
-      cart.map(cartItem => {
-        if (product.id === cartItem.id) {
-          itemTotal.push(product.price * cartItem.quantity);
-        }
-        return false;
-      });
-      return false;
-    });
-    if (itemTotal.length > 0) {
-      return itemTotal.reduce(totalCostReducer);
+    const totalCostReducer = (subTotal: number, totalProductCost: number) =>
+      subTotal + totalProductCost;
+    const totalCostPerProduct: number[] = [];
+    cart.filter(cartItem =>
+      products.map(
+        product =>
+          product.id === cartItem.id &&
+          totalCostPerProduct.push(product.price * cartItem.quantity)
+      )
+    );
+    if (totalCostPerProduct.length > 0) {
+      return totalCostPerProduct.reduce(totalCostReducer);
     }
     return 0;
   })();
 
-  return { cart, cartQuantity, cartTotalCost };
+  const displayCartQuantity: string = (() => {
+    if (cartQuantity === 1) {
+      return `${cartQuantity} item in cart`;
+    }
+    if (cartQuantity > 1) {
+      return `${cartQuantity} items in cart`;
+    }
+    return "No items in cart";
+  })();
+
+  return { cart, cartQuantity, cartTotalCost, displayCartQuantity };
 };
