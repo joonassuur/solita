@@ -21,9 +21,10 @@ export const getCart = (state: {
   const cartTotalCost: number = (() => {
     const totalCostReducer = (subTotal: number, totalProductCost: number) =>
       subTotal + totalProductCost;
+
     const totalCostPerProduct: number[] = [];
     cart.filter(cartItem =>
-      products.map(
+      products.forEach(
         product =>
           product.id === cartItem.id &&
           totalCostPerProduct.push(product.price * cartItem.quantity)
