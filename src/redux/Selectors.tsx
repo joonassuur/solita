@@ -22,18 +22,15 @@ export const getCart = (state: {
     const totalCostReducer = (subTotal: number, totalProductCost: number) =>
       subTotal + totalProductCost;
 
-    const totalCostPerProduct: number[] = [];
-    cart.filter(cartItem =>
-      products.forEach(
-        product =>
-          product.id === cartItem.id &&
-          totalCostPerProduct.push(product.price * cartItem.quantity)
+    const totalCostPerProduct = cart.map(cartItem =>
+      products.map(product =>
+        product.id === cartItem.id ? product.price * cartItem.quantity : 0
       )
     );
-    if (totalCostPerProduct.length > 0) {
-      return totalCostPerProduct.reduce(totalCostReducer);
-    }
-    return 0;
+    const totalCost: number = totalCostPerProduct
+      .reduce((combinedArray, itemTotal) => combinedArray.concat(itemTotal), [])
+      .reduce(totalCostReducer);
+    return totalCost;
   })();
 
   const displayCartQuantity: string = (() => {
