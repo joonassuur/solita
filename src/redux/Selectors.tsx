@@ -27,8 +27,9 @@ export const getCart = (state: {
         product.id === cartItem.id ? product.price * cartItem.quantity : 0
       )
     );
+
     const totalCost: number = totalCostPerProduct
-      .reduce((combinedArray, itemTotal) => combinedArray.concat(itemTotal), [])
+      .flat()
       .reduce(totalCostReducer);
     return totalCost;
   })();
