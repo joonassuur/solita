@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should match snapshot 1`] = `ShallowWrapper {}`;
+exports[`Should match Header component snapshot 1`] = `ShallowWrapper {}`;
+
+exports[`Simulate cart icon click 1`] = `ShallowWrapper {}`;

@@ -52,7 +52,7 @@ describe("StoreItems Component", () => {
     expect(actions).toEqual([expectedPayload]);
   });
 
-  it("Should match snapshot", () => {
+  it("Should match snapshot with cart view props", () => {
     const props = {
       cartAction: "add",
       buttonText: "Add to cart",
@@ -62,7 +62,7 @@ describe("StoreItems Component", () => {
     expect(testRenderer).toMatchSnapshot();
   });
 
-  it("Should match snapshot", () => {
+  it("Should match snapshot with remove from cart props", () => {
     const props = {
       cartAction: "remove",
       buttonText: "Remove from cart",
