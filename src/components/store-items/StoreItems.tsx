@@ -77,7 +77,7 @@ function StoreItems(
     return products.map((product: StoreItem) => {
       if (renderElement === "cart") {
         // render cart list
-        return cart.map(cartItem => {
+        return cart && cart.map(cartItem => {
           return (
             // during cart view, render only items that are in cart
             product.id === cartItem.id &&

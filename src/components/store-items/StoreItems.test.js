@@ -55,7 +55,7 @@ describe("StoreItems Component", () => {
   it("Should match snapshot", () => {
     const props = {
       cartAction: "add",
-      buttonText: "Add to Cart",
+      buttonText: "Add to cart",
       renderElement: "products"
     };
     const testRenderer = shallow(<StoreItems {...props} />);
@@ -65,7 +65,7 @@ describe("StoreItems Component", () => {
   it("Should match snapshot", () => {
     const props = {
       cartAction: "remove",
-      buttonText: "Remove from Cart",
+      buttonText: "Remove from cart",
       renderElement: "cart"
     };
     const testRenderer = shallow(<StoreItems {...props} />);
