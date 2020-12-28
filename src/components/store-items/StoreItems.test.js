@@ -4,6 +4,7 @@ import thunk from "redux-thunk";
 import configureStore from "redux-mock-store";
 import StoreItems from "./StoreItems";
 import Cart from "../cart/Cart";
+import Main from "../main/Main";
 import { getCart, getProducts } from "../../redux/Selectors";
 import { addToCart } from "../../redux/AppActions";
 import { products } from "../../mockedAPI/products.json";
@@ -77,43 +78,58 @@ describe("StoreItems Component", () => {
     expect(actions).toEqual([expectedPayload]);
   });
 
-  it(".product-name class at iteration 1 should render Rectangle item name", () => {
-    const props = {
-      ...getCart(),
-      cartAction: "add",
-      buttonText: "Add to cart",
-      renderElement: "products",
-    };
-    const component = shallow(<StoreItems {...props} />);
+  it(".product-name class at iteration 1 should render string 'Rectangle'", () => {
+    const component = shallow(
+      <Main>{StoreItems("add", "Add to cart", "products")}</Main>
+    );
     expect(component.find(".product-name").at(1).text()).toEqual("Rectangle");
   });
 
-  it(".product-quantity class at iteration 1 should render Quantity: 2", () => {
-    const component = mount(
-      <Cart>
-        {StoreItems("remove", "Remove from cart", "cart")}
-      </Cart>
+  it(".product-quantity class at iteration 0 should render Quantity: 2", () => {
+    const component = shallow(
+      <Cart>{StoreItems("remove", "Remove from cart", "cart")}</Cart>
     );
-    expect(component.find(".product-quantity").text()).toEqual("Quantity: 2");
+    expect(component.find(".product-quantity").at(0).text()).toEqual(
+      "Quantity: 2"
+    );
   });
 
-  // it("Should match snapshot with cart view props", () => {
-  //   const props = {
-  //     cartAction: "add",
-  //     buttonText: "Add to cart",
-  //     renderElement: "products"
-  //   };
-  //   const testRenderer = shallow(<StoreItems {...props} />);
-  //   expect(testRenderer).toMatchSnapshot();
-  // });
+  it(".addRemove-btn button text should be 'Remove from cart'", () => {
+    const component = shallow(
+      <Cart>{StoreItems("remove", "Remove from cart", "cart")}</Cart>
+    );
+    expect(component.find(".addRemove-btn").at(0).text()).toEqual(
+      "Remove from cart"
+    );
+  });
 
-  // it("Should match snapshot with remove from cart props", () => {
-  //   const props = {
-  //     cartAction: "remove",
-  //     buttonText: "Remove from cart",
-  //     renderElement: "cart"
-  //   };
-  //   const testRenderer = shallow(<StoreItems {...props} />);
-  //   expect(testRenderer).toMatchSnapshot();
-  // });
+  it(".addRemove-btn button text should be 'Add to cart'", () => {
+    const component = shallow(
+      <Main>{StoreItems("add", "Add to cart", "products")}</Main>
+    );
+    expect(component.find(".addRemove-btn").at(0).text()).toEqual(
+      "Add to cart"
+    );
+  });
+
+  it("Should return <h2>No items in cart</h2> when cart is empty", () => {
+    getCart.mockReturnValue({ cartQuantity: 0, cart: [] });
+    const component = StoreItems("remove", "Remove from cart", "cart");
+
+    expect(component).toEqual(<h2>No items in cart</h2>);
+  });
+
+  it("Should match snapshot with Cart component props", () => {
+    const component = shallow(
+      <Cart>{StoreItems("remove", "Remove from cart", "cart")}</Cart>
+    );
+    expect(component).toMatchSnapshot();
+  });
+
+  it("Should match snapshot with Main component props", () => {
+    const component = shallow(
+      <Main>{StoreItems("add", "Add to cart", "products")}</Main>
+    );
+    expect(component).toMatchSnapshot();
+  });
 });

@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StoreItems Component Should match snapshot with Cart component props 1`] = `ShallowWrapper {}`;
+
+exports[`StoreItems Component Should match snapshot with Main component props 1`] = `ShallowWrapper {}`;
