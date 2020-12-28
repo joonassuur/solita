@@ -3,6 +3,7 @@ import { shallow, mount } from "enzyme";
 import thunk from "redux-thunk";
 import configureStore from "redux-mock-store";
 import StoreItems from "./StoreItems";
+import Cart from "../cart/Cart";
 import { getCart, getProducts } from "../../redux/Selectors";
 import { addToCart } from "../../redux/AppActions";
 import { products } from "../../mockedAPI/products.json";
@@ -88,15 +89,12 @@ describe("StoreItems Component", () => {
   });
 
   it(".product-quantity class at iteration 1 should render Quantity: 2", () => {
-    const props = {
-      ...getCart(),
-      ...getProducts(),
-      cartAction: "remove",
-      buttonText: "Add to cart",
-      renderElement: "cart",
-    };
-    const component = mount(<StoreItems {...props} />);
-    expect(component.find(".product-quantity")).toEqual("Quantity: 2");
+    const component = mount(
+      <Cart>
+        {StoreItems("remove", "Remove from cart", "cart")}
+      </Cart>
+    );
+    expect(component.find(".product-quantity").text()).toEqual("Quantity: 2");
   });
 
   // it("Should match snapshot with cart view props", () => {
