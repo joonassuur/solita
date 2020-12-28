@@ -1,10 +1,9 @@
 import React from "react";
 import thunk from "redux-thunk";
-import { createMemoryHistory } from "history";
 
 import configureStore from "redux-mock-store";
-import { MemoryRouter, Router } from "react-router-dom";
-import { shallow, mount } from "enzyme";
+import { MemoryRouter } from "react-router-dom";
+import { mount } from "enzyme";
 import { Route, Switch } from "react-router-dom";
 
 import Main from "../main/Main";
