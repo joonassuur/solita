@@ -74,22 +74,29 @@ function StoreItems(
       return <h2>No items in cart</h2>;
     }
 
-    return products.map((product: StoreItem) => {
-      if (renderElement === "cart") {
-        // render cart list
-        return cart && cart.map(cartItem => {
-          return (
-            // during cart view, render only items that are in cart
-            product.id === cartItem.id &&
-            cartItem.quantity > 0 &&
-            renderItemList(product, cartItem.quantity)
-          );
-        });
-      } else {
-        // render product list
-        return renderItemList(product);
-      }
-    });
+    return (
+      <>
+        {products?.map((product: StoreItem) => {
+          if (renderElement === "cart") {
+            // render cart list
+            return (
+              cart &&
+              cart.map(cartItem => {
+                return (
+                  // during cart view, render only items that are in cart
+                  product.id === cartItem.id &&
+                  cartItem.quantity > 0 &&
+                  renderItemList(product, cartItem.quantity)
+                );
+              })
+            );
+          } else {
+            // render product list
+            return renderItemList(product);
+          }
+        })}
+      </>
+    );
   };
 
   return renderStoreItems();

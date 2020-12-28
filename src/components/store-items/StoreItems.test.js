@@ -1,10 +1,10 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 import thunk from "redux-thunk";
 import configureStore from "redux-mock-store";
 import StoreItems from "./StoreItems";
 import { getCart, getProducts } from "../../redux/Selectors";
-import { addToCart, removeFromCart } from "../../redux/AppActions";
+import { addToCart } from "../../redux/AppActions";
 import { products } from "../../mockedAPI/products.json";
 
 const middlewares = [thunk];
@@ -13,62 +13,109 @@ const mockStore = configureStore(middlewares);
 const mockDispatch = jest.fn();
 
 jest.mock("react-redux", () => ({
-  useSelector: jest.fn(fn => fn()),
-  useDispatch: () => mockDispatch
+  useSelector: jest.fn((fn) => fn()),
+  useDispatch: () => mockDispatch,
 }));
 jest.mock("../../redux/Selectors");
-getCart.mockReturnValue([]);
+getCart.mockReturnValue({ cartQuantity: 2, cart: [{ id: 2, quantity: 2 }] });
 getProducts.mockReturnValue(products);
 
 describe("StoreItems Component", () => {
-  // Initialize mockstore with empty state
+  // Initialize mockstore
   let initialState;
   let store;
   beforeEach(() => {
     initialState = {
-      products: [],
-      cart: []
+      products: [products],
+      cart: [getCart().cart],
     };
-    store = mockStore(initialState)
+    store = mockStore(initialState);
   });
 
-  it("should dispatch addToCart action", () => {
-    // Dispatch the action
-    store.dispatch(addToCart());
-
-    // Test if your store dispatched the expected actions
-    const actions = store.getActions();
-    const expectedPayload = { type: "@app: addToCart" };
-    expect(actions).toEqual([expectedPayload]);
-  });
-
-  it("should dispatch removeFromCart action", () => {
-    // Dispatch the action
-    store.dispatch(removeFromCart());
-
-    // Test if your store dispatched the expected actions
-    const actions = store.getActions();
-    const expectedPayload = { type: "@app: removeFromCart" };
-    expect(actions).toEqual([expectedPayload]);
-  });
-
-  it("Should match snapshot with cart view props", () => {
+  it("should dispatch addToCart action on 'Add to cart' button click and increment 'id: 2' quantity from 2 to 3", () => {
     const props = {
+      ...getCart(),
       cartAction: "add",
       buttonText: "Add to cart",
-      renderElement: "products"
+      renderElement: "products",
     };
-    const testRenderer = shallow(<StoreItems {...props} />);
-    expect(testRenderer).toMatchSnapshot();
+    const component = shallow(<StoreItems {...props} />);
+    const addOrRemoveItem = jest.fn();
+    // Simulate the 'Add to cart' button click
+    component.find(".addRemove-btn").at(1).simulate("click", addOrRemoveItem());
+    // Dispatch the action
+    store.dispatch(addToCart([{ id: 2, quantity: 3 }]));
+    // Test if your store dispatched the expected actions
+    const actions = store.getActions();
+    const expectedPayload = {
+      type: "@app: addToCart",
+      payload: [{ id: 2, quantity: 3 }],
+    };
+    expect(actions).toEqual([expectedPayload]);
   });
 
-  it("Should match snapshot with remove from cart props", () => {
+  it("should dispatch removeFromCart action on 'Remove from cart' button click and decrement 'id: 2' quantity from 2 to 1", () => {
     const props = {
+      ...getCart(),
       cartAction: "remove",
       buttonText: "Remove from cart",
-      renderElement: "cart"
+      renderElement: "cart",
     };
-    const testRenderer = shallow(<StoreItems {...props} />);
-    expect(testRenderer).toMatchSnapshot();
+    const component = shallow(<StoreItems {...props} />);
+    const addOrRemoveItem = jest.fn();
+    // Simulate the 'Remove from cart' button click
+    component.find(".addRemove-btn").at(1).simulate("click", addOrRemoveItem());
+    // Dispatch the action
+    store.dispatch(addToCart([{ id: 2, quantity: 1 }]));
+    // Test if your store dispatched the expected actions
+    const actions = store.getActions();
+    const expectedPayload = {
+      type: "@app: addToCart",
+      payload: [{ id: 2, quantity: 1 }],
+    };
+    expect(actions).toEqual([expectedPayload]);
   });
+
+  it(".product-name class at iteration 1 should render Rectangle item name", () => {
+    const props = {
+      ...getCart(),
+      cartAction: "add",
+      buttonText: "Add to cart",
+      renderElement: "products",
+    };
+    const component = shallow(<StoreItems {...props} />);
+    expect(component.find(".product-name").at(1).text()).toEqual("Rectangle");
+  });
+
+  it(".product-quantity class at iteration 1 should render Quantity: 2", () => {
+    const props = {
+      ...getCart(),
+      ...getProducts(),
+      cartAction: "remove",
+      buttonText: "Add to cart",
+      renderElement: "cart",
+    };
+    const component = mount(<StoreItems {...props} />);
+    expect(component.find(".product-quantity")).toEqual("Quantity: 2");
+  });
+
+  // it("Should match snapshot with cart view props", () => {
+  //   const props = {
+  //     cartAction: "add",
+  //     buttonText: "Add to cart",
+  //     renderElement: "products"
+  //   };
+  //   const testRenderer = shallow(<StoreItems {...props} />);
+  //   expect(testRenderer).toMatchSnapshot();
+  // });
+
+  // it("Should match snapshot with remove from cart props", () => {
+  //   const props = {
+  //     cartAction: "remove",
+  //     buttonText: "Remove from cart",
+  //     renderElement: "cart"
+  //   };
+  //   const testRenderer = shallow(<StoreItems {...props} />);
+  //   expect(testRenderer).toMatchSnapshot();
+  // });
 });

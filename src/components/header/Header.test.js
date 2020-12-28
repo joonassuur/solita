@@ -8,21 +8,27 @@ jest.mock("react-redux", () => ({
   useSelector: jest.fn(fn => fn())
 }));
 jest.mock("../../redux/Selectors");
-getCart.mockReturnValue([]);
+getCart.mockReturnValue({displayCartQuantity: 2, cartTotalCost: 1798});
 
-it("Simulate cart icon click", () => {
-  const baseProps = {
-    navigateToCart: jest.fn()
-  };
-  const testRenderer = shallow(<Header {...baseProps}></Header>);
-  baseProps.navigateToCart();
-  expect(baseProps.navigateToCart).toHaveBeenCalled();
+describe("Header Component", () => {
+  const component = shallow(<Header {...getCart}></Header>);
 
-  expect(testRenderer).toMatchSnapshot();
-});
-
-it("Should match Header component snapshot", () => {
-  const testRenderer = shallow(<Header></Header>);
-  expect(testRenderer).toMatchSnapshot();
-});
+  it("Should simulate cart icon click", () => {
+    const navigateToCart = jest.fn();
+    component.find(".cart-icon").simulate("click", navigateToCart());
+    expect(navigateToCart).toBeCalled();
+  });
+  
+  it("Should display .cart-quantity element text output as '2'", () => {
+    expect(component.find(".cart-quantity").text()).toEqual("2")
+  });
+  
+  it("Should display .cart-cost element text output as 'Total: 1798 €'", () => {
+    expect(component.find(".cart-cost").text()).toEqual("Total: 1798 €")
+  });
+  
+  it("Should match Header component snapshot", () => {
+    expect(component).toMatchSnapshot();
+  });
+})
 

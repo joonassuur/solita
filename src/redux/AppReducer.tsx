@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchStoreData, addToCart, removeFromCart } from "../redux/AppActions";
+import { fetchStoreData, addToCart } from "../redux/AppActions";
 import { Store } from "../types/Types";
 
 const initialState: Store = {
@@ -28,10 +28,6 @@ const app = createSlice({
           )
         }
       },
-    [removeFromCart.toString()]: (state, { payload }) => {
-      const removeIndex = state.cart.map(item => item.id).indexOf(payload.id);
-      state.cart.splice(removeIndex, 1);
-    }
   }
 });
 
