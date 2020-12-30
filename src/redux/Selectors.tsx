@@ -22,8 +22,8 @@ export const getCart = (state: {
     const totalCostReducer = (subTotal: number, totalProductCost: number) =>
       subTotal + totalProductCost;
 
-    const totalCostPerProduct = cart.map(cartItem =>
-      products.map(product =>
+    const totalCostPerProduct = cart.map((cartItem) =>
+      products.map((product) =>
         product.id === cartItem.id ? product.price * cartItem.quantity : 0
       )
     );
@@ -34,7 +34,7 @@ export const getCart = (state: {
     return totalCost;
   })();
 
-  const displayCartQuantity: string = (() => {
+  const cartQuantityString: string = (() => {
     if (cartQuantity === 1) {
       return `${cartQuantity} item in cart`;
     }
@@ -44,5 +44,5 @@ export const getCart = (state: {
     return "No items in cart";
   })();
 
-  return { cart, cartQuantity, cartTotalCost, displayCartQuantity };
+  return { cart, cartQuantity, cartTotalCost, cartQuantityString };
 };

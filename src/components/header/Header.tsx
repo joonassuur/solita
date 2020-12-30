@@ -9,7 +9,7 @@ function Header({
 }: {
   navigateToCart: React.MouseEventHandler;
 }) {
-  const { cartTotalCost, displayCartQuantity } = useSelector(getCart);
+  const { cartTotalCost, cartQuantityString } = useSelector(getCart);
 
   return (
     <div id="header-container">
@@ -23,7 +23,7 @@ function Header({
           </div>
           <div className="cart-display">
             <div className="cart">
-              <div className="cart-quantity">{displayCartQuantity}</div>
+              <div className="cart-quantity">{cartQuantityString}</div>
               <div className="cart-cost">{`Total: ${cartTotalCost} €`}</div>
             </div>
             <div className="cart-icon" onClick={navigateToCart}>

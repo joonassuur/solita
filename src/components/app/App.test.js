@@ -26,7 +26,6 @@ getCart.mockReturnValue({ cartQuantity: 0, cart: [] });
 getProducts.mockReturnValue(products);
 
 describe("Render correct component based on route", () => {
-
   it("should render Main component", () => {
     const wrapper = mount(
       <MemoryRouter initialEntries={["/"]}>
@@ -36,10 +35,10 @@ describe("Render correct component based on route", () => {
         </Switch>
       </MemoryRouter>
     );
-  
+
     expect(wrapper.find(Main)).toHaveLength(1);
   });
-  
+
   it("should render Cart component", () => {
     const wrapper = mount(
       <MemoryRouter initialEntries={["/cart"]}>
@@ -49,8 +48,7 @@ describe("Render correct component based on route", () => {
         </Switch>
       </MemoryRouter>
     );
-  
+
     expect(wrapper.find(Cart)).toHaveLength(1);
   });
-})
-
+});
