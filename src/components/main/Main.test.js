@@ -23,6 +23,6 @@ it("Should match snapshot", () => {
     buttonText: "Add to cart",
     renderElement: "products"
   };
-  const testRenderer = shallow(<Main><StoreItems {...props} /></Main>);
-  expect(testRenderer).toMatchSnapshot();
+  const component = shallow(<Main><StoreItems {...props} /></Main>);
+  expect(component).toMatchSnapshot();
 });

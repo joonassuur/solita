@@ -28,7 +28,7 @@ getProducts.mockReturnValue(products);
 describe("Render correct component based on route", () => {
 
   it("should render Main component", () => {
-    let wrapper = mount(
+    const wrapper = mount(
       <MemoryRouter initialEntries={["/"]}>
         <Switch>
           <Route exact path="/" component={Main} />
@@ -41,7 +41,7 @@ describe("Render correct component based on route", () => {
   });
   
   it("should render Cart component", () => {
-    let wrapper = mount(
+    const wrapper = mount(
       <MemoryRouter initialEntries={["/cart"]}>
         <Switch>
           <Route exact path="/" component={Main} />
