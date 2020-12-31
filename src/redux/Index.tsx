@@ -1,6 +1,6 @@
 export {
   fetchStoreData,
-  addToCart,
+  modifyCart,
 } from "./AppActions";
 
 export { getProducts, getCart } from "./Selectors";

@@ -30,7 +30,6 @@
     "redux-persist": "^6.0.0",
     "typescript": "^4.0.3"
   },
-  "proxy": "http://localhost:8484",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

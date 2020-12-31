@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchStoreData, addToCart } from "../redux/AppActions";
+import { fetchStoreData, modifyCart } from "../redux/AppActions";
 import { Store } from "../types/Types";
+
+import _ from "lodash";
 
 const initialState: Store = {
   products: [],
-  cart: []
+  cart: [],
 };
 
 const app = createSlice({
@@ -15,20 +17,29 @@ const app = createSlice({
     [fetchStoreData.fulfilled.toString()]: (state, { payload }) => {
       state.products = payload.products;
     },
-    [fetchStoreData.rejected.toString()]: state => {
+    [fetchStoreData.rejected.toString()]: (state) => {
       return state;
     },
-    [addToCart.toString()]: (state, { payload }) =>
-      void {
-        ...state,
-        cart: {
-          ...state.cart,
-          id: state.cart.filter(item =>
-            item.id === payload.id ? (item.quantity = payload.quantity) : false
-          )
-        }
-      },
-  }
+    [modifyCart.toString()]: (state, { payload }) => {
+      const clonedCart = _.cloneDeep(state.cart);
+
+      const existingItemFilter = clonedCart.filter(
+        (cartItem) => cartItem.id === payload.id
+      );
+      
+      if (existingItemFilter.length > 0) {
+        clonedCart.map((cartItem) =>
+          cartItem.id === existingItemFilter[0].id
+            ? (cartItem.quantity = payload.quantity)
+            : false
+        );
+      } else {
+        clonedCart.push(payload);
+      }
+
+      state.cart = clonedCart;
+    },
+  },
 });
 
 export default app;

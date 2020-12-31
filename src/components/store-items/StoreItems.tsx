@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, getCart, getProducts } from "../../redux/Index";
+import { modifyCart, getCart, getProducts } from "../../redux/Index";
 import { StoreItem, CartItem } from "../../types/Types";
 import _ from "lodash";
 import { toast } from "react-toastify";
@@ -24,9 +24,16 @@ function StoreItems(
   const notify = (toastString: string) => toast(toastString);
 
   const addOrRemoveItem = (storeItem: StoreItem) => {
-    const cartFilter: CartItem[] = cart.filter(
-      cartItem => cartItem.id === storeItem.id
-    );
+    const cartFilter: CartItem[] = (() => {
+      const existingItemInCart = cart.filter(
+        (cartItem) => cartItem.id === storeItem.id
+      );
+      if (existingItemInCart.length > 0) {
+        return existingItemInCart;
+      }
+      return [{ id: storeItem.id, quantity: 0 }];
+    })();
+
     let cartFilterCopy = _.cloneDeep(cartFilter[0]);
 
     if (cartAction === "remove") {
@@ -37,7 +44,8 @@ function StoreItems(
       cartFilterCopy.quantity += 1;
       notify("Item added to cart");
     }
-    dispatch(addToCart(cartFilterCopy));
+
+    dispatch(modifyCart(cartFilterCopy));
   };
 
   const renderItemList = (product: StoreItem, quantity?: number) => {
@@ -81,7 +89,7 @@ function StoreItems(
             // render cart list
             return (
               cart &&
-              cart.map(cartItem => {
+              cart.map((cartItem) => {
                 return (
                   // during cart view, render only items that are in cart
                   product.id === cartItem.id &&

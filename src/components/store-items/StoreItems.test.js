@@ -6,7 +6,7 @@ import StoreItems from "./StoreItems";
 import Cart from "../cart/Cart";
 import Main from "../main/Main";
 import { getCart, getProducts } from "../../redux/Selectors";
-import { addToCart } from "../../redux/AppActions";
+import { modifyCart } from "../../redux/AppActions";
 import { products } from "../../mockedAPI/products.json";
 
 const middlewares = [thunk];
@@ -34,7 +34,7 @@ describe("StoreItems Component", () => {
     store = mockStore(initialState);
   });
 
-  it("should dispatch addToCart action on 'Add to cart' button click and increment 'id: 2' quantity from 2 to 3", () => {
+  it("should dispatch modifyCart action on 'Add to cart' button click and increment 'id: 2' quantity from 2 to 3", () => {
     const props = {
       ...getCart(),
       cartAction: "add",
@@ -46,11 +46,11 @@ describe("StoreItems Component", () => {
     // Simulate the 'Add to cart' button click
     component.find(".addRemove-btn").at(1).simulate("click", addOrRemoveItem());
     // Dispatch the action
-    store.dispatch(addToCart([{ id: 2, quantity: 3 }]));
+    store.dispatch(modifyCart([{ id: 2, quantity: 3 }]));
     // Test if your store dispatched the expected actions
     const actions = store.getActions();
     const expectedPayload = {
-      type: "@app: addToCart",
+      type: "@app: modifyCart",
       payload: [{ id: 2, quantity: 3 }],
     };
     expect(actions).toEqual([expectedPayload]);
@@ -68,11 +68,11 @@ describe("StoreItems Component", () => {
     // Simulate the 'Remove from cart' button click
     component.find(".addRemove-btn").at(1).simulate("click", addOrRemoveItem());
     // Dispatch the action
-    store.dispatch(addToCart([{ id: 2, quantity: 1 }]));
+    store.dispatch(modifyCart([{ id: 2, quantity: 1 }]));
     // Test if your store dispatched the expected actions
     const actions = store.getActions();
     const expectedPayload = {
-      type: "@app: addToCart",
+      type: "@app: modifyCart",
       payload: [{ id: 2, quantity: 1 }],
     };
     expect(actions).toEqual([expectedPayload]);

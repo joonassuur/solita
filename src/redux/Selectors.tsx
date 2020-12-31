@@ -22,11 +22,17 @@ export const getCart = (state: {
     const totalCostReducer = (subTotal: number, totalProductCost: number) =>
       subTotal + totalProductCost;
 
-    const totalCostPerProduct = cart.map((cartItem) =>
-      products.map((product) =>
-        product.id === cartItem.id ? product.price * cartItem.quantity : 0
-      )
-    );
+    const totalCostPerProduct = (() => {
+      const totalCost = cart.map((cartItem) =>
+        products.map((product) =>
+          product.id === cartItem.id ? product.price * cartItem.quantity : 0
+        )
+      );
+      if (totalCost.length > 0) {
+        return totalCost;
+      }
+      return [0];
+    })();
 
     const totalCost: number = totalCostPerProduct
       .flat()

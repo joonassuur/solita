@@ -25,6 +25,7 @@ function App() {
   };
 
   useEffect(() => {
+    console.log("aaaa")
     dispatch(fetchStoreData());
   });
 
