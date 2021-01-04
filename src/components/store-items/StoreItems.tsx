@@ -1,6 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { modifyCart, getCart, getProducts } from "../../redux/Index";
+import {
+  modifyCart,
+  getCart,
+  getProducts,
+  toggleModal,
+} from "../../redux/Index";
 import { StoreItem, CartItem } from "../../types/Types";
 import _ from "lodash";
 import { toast } from "react-toastify";
@@ -20,7 +25,7 @@ function StoreItems(
   const dispatch = useDispatch();
   const { cart, cartQuantity } = useSelector(getCart);
   const products = useSelector(getProducts);
-
+  
   const notify = (toastString: string) => toast(toastString);
 
   const addOrRemoveItem = (storeItem: StoreItem) => {
@@ -42,6 +47,7 @@ function StoreItems(
     }
     if (cartAction === "add") {
       cartFilterCopy.quantity += 1;
+      dispatch(toggleModal(true));
       notify("Item added to cart");
     }
 

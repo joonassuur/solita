@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchStoreData, modifyCart } from "../redux/AppActions";
+import { fetchStoreData, modifyCart, toggleModal } from "../redux/AppActions";
 import { Store } from "../types/Types";
 
 import _ from "lodash";
@@ -7,6 +7,7 @@ import _ from "lodash";
 const initialState: Store = {
   products: [],
   cart: [],
+  isModalOpen: false,
 };
 
 const app = createSlice({
@@ -22,7 +23,6 @@ const app = createSlice({
     },
     [modifyCart.toString()]: (state, { payload }) => {
       const clonedCart = _.cloneDeep(state.cart);
-
       const existingItemFilter = clonedCart.filter(
         (cartItem) => cartItem.id === payload.id
       );
@@ -38,6 +38,9 @@ const app = createSlice({
       }
 
       state.cart = clonedCart;
+    },
+    [toggleModal.toString()]: (state, { payload }) => {
+      state.isModalOpen = payload;
     },
   },
 });

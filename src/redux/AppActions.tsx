@@ -19,3 +19,6 @@ export const fetchStoreData = createAsyncThunk(
 export const modifyCart = createAction("@app: modifyCart", item => {
   return { payload: item };
 });
+export const toggleModal = createAction("@app: toggleModal", isOpen => {
+  return { payload: isOpen };
+});

@@ -23,9 +23,8 @@ function App() {
   const handleNavigateToStore = () => {
     history.push("/");
   };
-
+  
   useEffect(() => {
-    console.log("aaaa")
     dispatch(fetchStoreData());
   });
 

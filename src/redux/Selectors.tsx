@@ -52,3 +52,6 @@ export const getCart = (state: {
 
   return { cart, cartQuantity, cartTotalCost, cartQuantityString };
 };
+
+export const getIsModalOpen = (state: { app: { isModalOpen: boolean } }) =>
+  state.app.isModalOpen;
