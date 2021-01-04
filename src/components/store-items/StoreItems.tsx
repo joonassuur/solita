@@ -52,25 +52,25 @@ function StoreItems(
     // render cart / product list
     return (
       <div key={product.id} className="storeItem">
-        <div className="left">
-          <div className={`image ${product.name.toLowerCase()}`}></div>
-          <div className="name-desc">
+        <div className={`image ${product.name.toLowerCase()}`}></div>
+        <div className="item-details">
+          <div className="name-price">
             <h1 className="product-name">{product.name}</h1>
-            <div>{product.description}</div>
-          </div>
-        </div>
-        <div className="right">
-          <div className="price-btn-qty">
             <h1 className="product-price">{`${product.price} €`}</h1>
-            {renderElement === "cart" && (
-              <h3 className="product-quantity">{`Quantity: ${quantity}`}</h3>
-            )}
-            <button
-              className="addRemove-btn"
-              onClick={() => addOrRemoveItem(product)}
-            >
-              {buttonText}
-            </button>
+          </div>
+          <div className="desc-btn-quantity">
+            <div>{product.description}</div>
+            <div className="quantity-btn">
+              {renderElement === "cart" && (
+                <h3 className="product-quantity">{`Quantity: ${quantity}`}</h3>
+              )}
+              <button
+                className="addRemove-btn"
+                onClick={() => addOrRemoveItem(product)}
+              >
+                {buttonText}
+              </button>
+            </div>
           </div>
         </div>
       </div>
