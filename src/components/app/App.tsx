@@ -16,6 +16,7 @@ function App() {
 
   const Main = lazy(() => import("../main/Main"));
   const Cart = lazy(() => import("../cart/Cart"));
+  const Contact = lazy(() => import("../contact/Contact"));
 
   const handleNavigateToCart = () => {
     history.push("/cart");
@@ -23,7 +24,7 @@ function App() {
   const handleNavigateToStore = () => {
     history.push("/");
   };
-  
+
   useEffect(() => {
     dispatch(fetchStoreData());
   });
@@ -40,6 +41,7 @@ function App() {
               path={`/cart`}
               render={() => <Cart navigateToStore={handleNavigateToStore} />}
             />
+            <Route exact path={`/contact`} component={Contact} />
           </Switch>
         </Suspense>
         <ToastContainer

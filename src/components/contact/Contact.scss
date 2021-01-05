@@ -1,0 +1,57 @@
+@import "../../variables.scss";
+
+#contact {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    input {
+      flex: 1 1 auto;
+      border-radius: 0;
+      border: 1px solid #ccc;
+      padding: 0.5em;
+    }
+    & > div {
+      display: flex;
+    }
+    .label-field {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      &:nth-child(2) {
+        margin-left: 5px;
+      }
+    }
+  }
+  .checkout-cart,
+  .contact-form {
+    width: 100%;
+  }
+}
+
+@media (min-width: $md) {
+  #contact {
+    .storeItem {
+      justify-content: flex-end;
+    }
+    .storeItem .item-details {
+      align-items: flex-end;
+      width: inherit;
+    }
+    .storeItem .image {
+      margin-right: 0;
+    }
+    .product-desc {
+      display: none;
+    }
+    .storeItem .name-price {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+  }
+}

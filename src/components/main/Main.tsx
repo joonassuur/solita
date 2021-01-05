@@ -8,11 +8,11 @@ import "./Main.scss";
 function Main() {
   const isModalOpen = useSelector(getIsModalOpen);
   const dispatch = useDispatch();
-  
-  const handleModal = () => {
-      dispatch(toggleModal(false))
+
+  const handleModal = (e: string) => {
+    dispatch(toggleModal(false));
   };
-  
+
   return (
     <div>
       {isModalOpen && <Modal handleModal={handleModal} />}

@@ -68,7 +68,7 @@ function StoreItems(
             <h1 className="product-price">{`${product.price} €`}</h1>
           </div>
           <div className="desc-btn-quantity">
-            <div>{product.description}</div>
+            <div className="product-desc">{product.description}</div>
             <div className="quantity-btn">
               {renderElement === "cart" && (
                 <h3 className="product-quantity">{`Quantity: ${quantity}`}</h3>
