@@ -11,7 +11,7 @@ jest.mock("../../redux/Selectors");
 getCart.mockReturnValue({ cartQuantityString: 2, cartTotalCost: 1798 });
 
 describe("Header Component", () => {
-  const component = shallow(<Header {...getCart}></Header>);
+  const component = shallow(<Header/>);
 
   it("Should simulate cart icon click", () => {
     const navigateToCart = jest.fn();
