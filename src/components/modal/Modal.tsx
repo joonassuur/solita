@@ -1,10 +1,10 @@
 import React from "react";
 import "./Modal.scss";
 interface PropsInterface {
-  handleModal: (e:string) => void;
+  handleModal: (e: string) => void;
 }
 
-const Modal: React.FC<PropsInterface> = ({handleModal}) => {
+const Modal: React.FC<PropsInterface> = ({ handleModal }) => {
   return (
     <div id="modal-container">
       <div className="modal-close-button">
@@ -28,6 +28,6 @@ const Modal: React.FC<PropsInterface> = ({handleModal}) => {
       </div>
     </div>
   );
-}
+};
 
 export default Modal;
