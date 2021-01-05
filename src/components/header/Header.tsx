@@ -12,7 +12,7 @@ function Header({
   const { cartTotalCost, cartQuantityString } = useSelector(getCart);
 
   return (
-    <div id="header-container">
+    <header id="header-container">
       <div className="header">
         <div className="container">
           <div className="store-name">
@@ -32,7 +32,7 @@ function Header({
           </div>
         </div>
       </div>
-    </div>
+    </header>
   );
 }
 

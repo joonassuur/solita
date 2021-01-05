@@ -25,7 +25,7 @@ function StoreItems(
   const dispatch = useDispatch();
   const { cart, cartQuantity } = useSelector(getCart);
   const products = useSelector(getProducts);
-  
+
   const notify = (toastString: string) => toast(toastString);
 
   const addOrRemoveItem = (storeItem: StoreItem) => {
@@ -58,7 +58,10 @@ function StoreItems(
     // render cart / product list
     return (
       <div key={product.id} className="storeItem">
-        <div className={`image ${product.name.toLowerCase()}`}></div>
+        <div
+          title={product.name}
+          className={`image ${product.name.toLowerCase()}`}
+        ></div>
         <div className="item-details">
           <div className="name-price">
             <h1 className="product-name">{product.name}</h1>

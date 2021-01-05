@@ -44,3 +44,19 @@
     }
   }
 }
+
+@media (max-width: $md) {
+  #modal-content {
+    width: 90%;
+    h1 {
+      font-size: 1.5em;
+    }
+    .buttons-container {
+      display: flex;
+      flex-direction: column;
+      .proceedCheckout {
+        margin-top: 5px;
+      }
+    }
+  }
+}
