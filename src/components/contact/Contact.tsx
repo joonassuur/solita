@@ -113,7 +113,7 @@ const Contact: React.FC<PropsInterface> = ({ navigateToCart }) => {
       </Formik>
       <div className="checkout-cart">
         {StoreItems("remove", "Remove from cart", "cart")}
-        <div className="total-amount">{`Total: ${cartTotalCost} €`}</div>
+        <div tabIndex={0} className="total-amount">{`Total: ${cartTotalCost} €`}</div>
       </div>
     </div>
   );
