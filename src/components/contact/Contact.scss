@@ -19,6 +19,7 @@
     }
     & > div {
       display: flex;
+      flex-direction: column;
     }
     .label-field {
       display: flex;
@@ -26,15 +27,16 @@
       flex-direction: column;
       width: 100%;
       &:nth-child(2) {
-        margin-left: 5px;
+        margin-left: 0;
       }
     }
     .buttons-container {
       button {
         margin-top: 1em;
+        width: 100%;
         flex: 1 1 auto;
         &:nth-child(2) {
-          margin-left: 5px;
+          margin-left: 0;
         }
       }
     }
@@ -79,6 +81,21 @@
     .contact-form {
       width: 60%;
       margin-right: 3em;
+      & > div {
+        flex-direction: row;
+      }
+      .label-field {
+        &:nth-child(2) {
+          margin-left: 5px;
+        }
+      }
+      .buttons-container {
+        button {
+          &:nth-child(2) {
+            margin-left: 5px;
+          }
+        }
+      }
     }
     .checkout-cart {
       width: 40%;
