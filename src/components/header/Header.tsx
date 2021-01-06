@@ -3,12 +3,14 @@ import { useSelector } from "react-redux";
 import { getCart } from "../../redux/Index";
 
 import "./Header.scss";
-
-function Header({
-  navigateToCart
-}: {
-  navigateToCart: React.MouseEventHandler;
-}) {
+interface PropsInterface {
+  navigateToStore: (route?: string) => void;
+  navigateToCart: (route?: string) => void;
+}
+const Header: React.FC<PropsInterface> = ({
+  navigateToCart,
+  navigateToStore,
+}) => {
   const { cartTotalCost, cartQuantityString } = useSelector(getCart);
 
   return (
@@ -16,7 +18,9 @@ function Header({
       <div className="header">
         <div className="container">
           <div className="store-name">
-            <div className="logo">whee</div>
+            <div className="logo" onClick={() => navigateToStore()}>
+              whee
+            </div>
             <div className="description">
               The most definitive shape store in the world
             </div>
@@ -26,7 +30,7 @@ function Header({
               <div className="cart-quantity">{cartQuantityString}</div>
               <div className="cart-cost">{`Total: ${cartTotalCost} €`}</div>
             </div>
-            <div className="cart-icon" onClick={navigateToCart}>
+            <div className="cart-icon" onClick={() => navigateToCart()}>
               <span className="material-icons">shopping_cart</span>
             </div>
           </div>
@@ -34,6 +38,6 @@ function Header({
       </div>
     </header>
   );
-}
+};
 
 export default Header;
