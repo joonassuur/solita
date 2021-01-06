@@ -22,11 +22,17 @@ export const getCart = (state: {
     const totalCostReducer = (subTotal: number, totalProductCost: number) =>
       subTotal + totalProductCost;
 
-    const totalCostPerProduct = cart.map(cartItem =>
-      products.map(product =>
-        product.id === cartItem.id ? product.price * cartItem.quantity : 0
-      )
-    );
+    const totalCostPerProduct = (() => {
+      const totalCost = cart.map((cartItem) =>
+        products.map((product) =>
+          product.id === cartItem.id ? product.price * cartItem.quantity : 0
+        )
+      );
+      if (totalCost.length > 0) {
+        return totalCost;
+      }
+      return [0];
+    })();
 
     const totalCost: number = totalCostPerProduct
       .flat()
@@ -34,7 +40,7 @@ export const getCart = (state: {
     return totalCost;
   })();
 
-  const displayCartQuantity: string = (() => {
+  const cartQuantityString: string = (() => {
     if (cartQuantity === 1) {
       return `${cartQuantity} item in cart`;
     }
@@ -44,5 +50,8 @@ export const getCart = (state: {
     return "No items in cart";
   })();
 
-  return { cart, cartQuantity, cartTotalCost, displayCartQuantity };
+  return { cart, cartQuantity, cartTotalCost, cartQuantityString };
 };
+
+export const getIsModalOpen = (state: { app: { isModalOpen: boolean } }) =>
+  state.app.isModalOpen;

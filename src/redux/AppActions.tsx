@@ -16,9 +16,9 @@ export const fetchStoreData = createAsyncThunk(
     }
   }
 );
-export const addToCart = createAction("@app: addToCart", item => {
+export const modifyCart = createAction("@app: modifyCart", item => {
   return { payload: item };
 });
-export const removeFromCart = createAction("@app: removeFromCart", item => {
-  return { payload: item };
+export const toggleModal = createAction("@app: toggleModal", isOpen => {
+  return { payload: isOpen };
 });

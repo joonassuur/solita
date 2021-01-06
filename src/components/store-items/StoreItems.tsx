@@ -1,6 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, getCart, getProducts } from "../../redux/Index";
+import {
+  modifyCart,
+  getCart,
+  getProducts,
+  toggleModal,
+} from "../../redux/Index";
 import { StoreItem, CartItem } from "../../types/Types";
 import _ from "lodash";
 import { toast } from "react-toastify";
@@ -24,9 +29,16 @@ function StoreItems(
   const notify = (toastString: string) => toast(toastString);
 
   const addOrRemoveItem = (storeItem: StoreItem) => {
-    const cartFilter: CartItem[] = cart.filter(
-      cartItem => cartItem.id === storeItem.id
-    );
+    const cartFilter: CartItem[] = (() => {
+      const existingItemInCart = cart.filter(
+        (cartItem) => cartItem.id === storeItem.id
+      );
+      if (existingItemInCart.length > 0) {
+        return existingItemInCart;
+      }
+      return [{ id: storeItem.id, quantity: 0 }];
+    })();
+
     let cartFilterCopy = _.cloneDeep(cartFilter[0]);
 
     if (cartAction === "remove") {
@@ -35,34 +47,39 @@ function StoreItems(
     }
     if (cartAction === "add") {
       cartFilterCopy.quantity += 1;
+      dispatch(toggleModal(true));
       notify("Item added to cart");
     }
-    dispatch(addToCart(cartFilterCopy));
+
+    dispatch(modifyCart(cartFilterCopy));
   };
 
   const renderItemList = (product: StoreItem, quantity?: number) => {
     // render cart / product list
     return (
       <div key={product.id} className="storeItem">
-        <div className="left">
-          <div className={`image ${product.name.toLowerCase()}`}></div>
-          <div className="name-desc">
+        <div
+          title={product.name}
+          className={`image ${product.name.toLowerCase()}`}
+        ></div>
+        <div className="item-details">
+          <div className="name-price">
             <h1 className="product-name">{product.name}</h1>
-            <div>{product.description}</div>
-          </div>
-        </div>
-        <div className="right">
-          <div className="price-btn-qty">
             <h1 className="product-price">{`${product.price} €`}</h1>
-            {renderElement === "cart" && (
-              <h3 className="product-quantity">{`Quantity: ${quantity}`}</h3>
-            )}
-            <button
-              className="addRemove-btn"
-              onClick={() => addOrRemoveItem(product)}
-            >
-              {buttonText}
-            </button>
+          </div>
+          <div className="desc-btn-quantity">
+            <div className="product-desc">{product.description}</div>
+            <div className="quantity-btn">
+              {renderElement === "cart" && (
+                <h3 className="product-quantity">{`Quantity: ${quantity}`}</h3>
+              )}
+              <button
+                className="addRemove-btn"
+                onClick={() => addOrRemoveItem(product)}
+              >
+                {buttonText}
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -74,22 +91,29 @@ function StoreItems(
       return <h2>No items in cart</h2>;
     }
 
-    return products.map((product: StoreItem) => {
-      if (renderElement === "cart") {
-        // render cart list
-        return cart.map(cartItem => {
-          return (
-            // during cart view, render only items that are in cart
-            product.id === cartItem.id &&
-            cartItem.quantity > 0 &&
-            renderItemList(product, cartItem.quantity)
-          );
-        });
-      } else {
-        // render product list
-        return renderItemList(product);
-      }
-    });
+    return (
+      <>
+        {products?.map((product: StoreItem) => {
+          if (renderElement === "cart") {
+            // render cart list
+            return (
+              cart &&
+              cart.map((cartItem) => {
+                return (
+                  // during cart view, render only items that are in cart
+                  product.id === cartItem.id &&
+                  cartItem.quantity > 0 &&
+                  renderItemList(product, cartItem.quantity)
+                );
+              })
+            );
+          } else {
+            // render product list
+            return renderItemList(product);
+          }
+        })}
+      </>
+    );
   };
 
   return renderStoreItems();

@@ -11,4 +11,5 @@ export interface CartItem {
 export interface Store {
   products: StoreItem[];
   cart: CartItem[];
+  isModalOpen: boolean;
 }
