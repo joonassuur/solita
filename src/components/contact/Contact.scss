@@ -58,6 +58,7 @@
     flex-direction: row;
     .storeItem {
       justify-content: flex-end;
+      justify-content: space-between;
     }
     .storeItem .item-details {
       align-items: flex-end;
@@ -77,6 +78,7 @@
 
     .contact-form {
       width: 60%;
+      margin-right: 3em;
     }
     .checkout-cart {
       width: 40%;
