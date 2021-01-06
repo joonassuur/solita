@@ -3,9 +3,23 @@ $md: 768px;
 $lg: 992px;
 $xl: 1200px;
 
-
 $bgLight: #e9e9e9;
 $bgDark: #000;
 
 $colorLight: #fff;
 $colorDark: #000;
+
+@mixin triangleStyle {
+  background-image: linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(255, 255, 255, 0) 50%
+    ),
+    linear-gradient(
+      -45deg,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(255, 255, 255, 0) 50%
+    );
+  height: 2.5em;
+  background-size: 2.5em;
+}

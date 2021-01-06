@@ -1,6 +1,6 @@
 import React, { useEffect, lazy, Suspense } from "react";
 import { useDispatch } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 
 import Header from "../header/Header";
 import { ToastContainer } from "react-toastify";
@@ -12,22 +12,34 @@ import "./App.scss";
 
 function App() {
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  const Main = lazy(() => import("../main/Main"));
+  const Cart = lazy(() => import("../cart/Cart"));
+
+  const handleNavigateToCart = () => {
+    history.push("/cart");
+  };
+  const handleNavigateToStore = () => {
+    history.push("/");
+  };
 
   useEffect(() => {
     dispatch(fetchStoreData());
   });
 
-  const Main = lazy(() => import("../main/Main"));
-  const Cart = lazy(() => import("../cart/Cart"));
-
   return (
     <div className="App">
       <ToastProvider>
-        <Header />
+        <Header navigateToCart={handleNavigateToCart} />
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
             <Route exact path={`/`} component={Main} />
-            <Route exact path={`/cart`} component={Cart} />
+            <Route
+              exact
+              path={`/cart`}
+              render={() => <Cart navigateToStore={handleNavigateToStore} />}
+            />
           </Switch>
         </Suspense>
         <ToastContainer
