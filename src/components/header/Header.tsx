@@ -18,15 +18,15 @@ const Header: React.FC<PropsInterface> = ({
       <div className="header">
         <div className="container">
           <div className="store-name">
-            <div
+            <a
               tabIndex={0}
-              role="tab"
               title="whee logo"
+              href="/#"
               className="logo"
               onClick={() => navigateToStore()}
             >
               whee
-            </div>
+            </a>
             <div tabIndex={0} className="description">
               The most definitive shape store in the world
             </div>

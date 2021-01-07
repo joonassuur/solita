@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Formik, Field, Form } from "formik";
 
@@ -12,7 +12,11 @@ interface PropsInterface {
 
 const Contact: React.FC<PropsInterface> = ({ navigateToCart }) => {
   const { cartTotalCost } = useSelector(getCart);
-
+  
+  useEffect(() => {
+    document.title = "whee web store - Contact";
+  }, []);
+  
   return (
     <div id="contact">
       <Formik
@@ -113,7 +117,10 @@ const Contact: React.FC<PropsInterface> = ({ navigateToCart }) => {
       </Formik>
       <div className="checkout-cart">
         {StoreItems("remove", "Remove from cart", "cart")}
-        <div tabIndex={0} className="total-amount">{`Total: ${cartTotalCost} €`}</div>
+        <div
+          tabIndex={0}
+          className="total-amount"
+        >{`Total: ${cartTotalCost} €`}</div>
       </div>
     </div>
   );

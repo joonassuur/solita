@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getCart } from "../../redux/Index";
 import StoreItems from "../store-items/StoreItems";
@@ -11,6 +11,10 @@ function Cart({
   navigateToStore: React.MouseEventHandler;
 }) {
   const { cartQuantity, cartTotalCost } = useSelector(getCart);
+
+  useEffect(() => {
+    document.title ="whee web store - Cart"
+  }, []);
 
   return (
     <div id="cart">
