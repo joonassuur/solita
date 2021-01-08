@@ -8,7 +8,7 @@ interface PropsInterface {
 }
 
 const SkipTo: React.FC<PropsInterface> = ({ skipToContent }) => {
-  const { buttonProps, itemProps, isOpen } = useDropdownMenu(1);
+  const { buttonProps, itemProps, isOpen, setIsOpen } = useDropdownMenu(1);
 
   return (
     <>
@@ -19,7 +19,14 @@ const SkipTo: React.FC<PropsInterface> = ({ skipToContent }) => {
         className={`accessible-menu ${isOpen ? "visible" : ""} `}
         role="menu"
       >
-        <a {...itemProps[0]} href="#content" onKeyPress={skipToContent}>
+        <a
+          {...itemProps[0]}
+          href="#content"
+          onKeyPress={() => {
+            setIsOpen(!isOpen);
+            skipToContent();
+          }}
+        >
           Content
         </a>
       </div>

@@ -16,7 +16,7 @@ const Header: React.FC<PropsInterface> = ({
 
   return (
     <header id="header-container">
-      <div className="header" >
+      <div className="header">
         <div className="container">
           <div className="store-name">
             <a
