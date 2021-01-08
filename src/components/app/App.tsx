@@ -46,7 +46,7 @@ function App() {
   };
 
   return (
-    <div className="App" aria-hidden={true}>
+    <div className="App">
       <SkipTo skipToContent={handleSkipToContent} />
       <ToastProvider>
         <Header
