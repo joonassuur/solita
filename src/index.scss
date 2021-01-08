@@ -36,6 +36,9 @@ button {
   padding: 0.6em 2em;
   border: 1px solid $colorDark;
   background: $colorLight;
+  font-family: "Playfair Display", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
 }
 button:hover {
   background: $colorDark;

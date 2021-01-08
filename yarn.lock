@@ -9705,6 +9705,11 @@ raw-body@2.4.0:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
+react-accessible-dropdown-menu-hook@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-accessible-dropdown-menu-hook/-/react-accessible-dropdown-menu-hook-2.2.0.tgz#0b54fafcd9248df4e7cf6e0fe997ae72fc8059e1"
+  integrity sha512-2lZUFcm1SBdJ/qiyTtcaNn07w4gVPL4VcI7dw/DoKAz8MZW3TUcRBwyhaAkuKJmdlxX4A4L9S26k2wmjdylzlQ==
+
 react-app-polyfill@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/react-app-polyfill/-/react-app-polyfill-1.0.6.tgz#890f8d7f2842ce6073f030b117de9130a5f385f0"

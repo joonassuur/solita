@@ -1,16 +1,19 @@
 import React, { useEffect, lazy, Suspense } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch, useHistory } from "react-router-dom";
+import useDropdownMenu from "react-accessible-dropdown-menu-hook";
 
-import Header from "../header/Header";
 import { ToastContainer } from "react-toastify";
 import { ToastProvider } from "react-toast-notifications";
 
+import Header from "../header/Header";
 import { fetchStoreData, toggleModal } from "../../redux/Index";
 
 import "./App.scss";
 
 function App() {
+  const { buttonProps, itemProps, isOpen } = useDropdownMenu(2);
+
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -33,10 +36,24 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchStoreData());
-  });
+  }, [dispatch]);
 
   return (
     <div className="App">
+      <button id="skipto" {...buttonProps}>
+        Skip to
+      </button>
+      <div
+        className={`accessible-menu ${isOpen ? "visible" : ""} `}
+        role="menu"
+      >
+        <a {...itemProps[0]} href="/#" onKeyPress={handleNavigateToStore}>
+          Store
+        </a>
+        <a {...itemProps[1]} href="/#" onKeyPress={handleNavigateToCart}>
+          Cart
+        </a>
+      </div>
       <ToastProvider>
         <Header
           navigateToCart={handleNavigateToCart}
