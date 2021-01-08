@@ -4,7 +4,7 @@ import useDropdownMenu from "react-accessible-dropdown-menu-hook";
 import "./SkipTo.scss";
 
 interface PropsInterface {
-    skipToContent: () => void;
+  skipToContent: () => void;
 }
 
 const SkipTo: React.FC<PropsInterface> = ({ skipToContent }) => {
