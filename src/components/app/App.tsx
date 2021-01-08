@@ -38,10 +38,7 @@ function App() {
 
   return (
     <div className="App">
-      <SkipTo
-        handleNavigateToStore={handleNavigateToStore}
-        handleNavigateToCart={handleNavigateToCart}
-      />
+      <SkipTo />
       <ToastProvider>
         <Header
           navigateToCart={handleNavigateToCart}

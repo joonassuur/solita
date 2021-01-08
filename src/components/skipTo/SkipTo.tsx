@@ -2,15 +2,8 @@ import React from "react";
 import useDropdownMenu from "react-accessible-dropdown-menu-hook";
 
 import "./SkipTo.scss";
-interface PropsInterface {
-  handleNavigateToStore: () => void;
-  handleNavigateToCart: () => void;
-}
 
-const SkipTo: React.FC<PropsInterface> = ({
-  handleNavigateToStore,
-  handleNavigateToCart,
-}) => {
+const SkipTo = () => {
   const { buttonProps, itemProps, isOpen } = useDropdownMenu(2);
 
   return (
