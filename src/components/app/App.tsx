@@ -38,7 +38,7 @@ function App() {
 
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const handleSkip = () => {
+  const handleSkipToContent = () => {
     const currentContentRef = contentRef.current;
     if (currentContentRef) {
       currentContentRef.focus();
@@ -47,7 +47,7 @@ function App() {
 
   return (
     <div className="App">
-      <SkipTo handleSkip={handleSkip} />
+      <SkipTo skipToContent={handleSkipToContent} />
       <ToastProvider>
         <Header
           navigateToCart={handleNavigateToCart}
