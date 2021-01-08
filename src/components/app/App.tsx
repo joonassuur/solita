@@ -1,4 +1,4 @@
-import React, { useEffect, lazy, Suspense } from "react";
+import React, { useEffect, lazy, Suspense, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch, useHistory } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -36,33 +36,44 @@ function App() {
     dispatch(fetchStoreData());
   }, [dispatch]);
 
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const handleSkip = () => {
+    const currentContentRef = contentRef.current;
+    if (currentContentRef) {
+      currentContentRef.focus();
+    }
+  };
+
   return (
     <div className="App">
-      <SkipTo />
+      <SkipTo handleSkip={handleSkip} />
       <ToastProvider>
         <Header
           navigateToCart={handleNavigateToCart}
           navigateToStore={handleNavigateToStore}
         />
-        <Suspense fallback={<div>Loading...</div>}>
-          <Switch>
-            <Route
-              exact
-              path={`/`}
-              render={() => <Main handleModal={handleModal} />}
-            />
-            <Route
-              exact
-              path={`/cart`}
-              render={() => <Cart navigateToStore={handleNavigateToStore} />}
-            />
-            <Route
-              exact
-              path={`/contact`}
-              render={() => <Contact navigateToCart={handleNavigateToCart} />}
-            />
-          </Switch>
-        </Suspense>
+        <div id="content" tabIndex={0} ref={contentRef}>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Switch>
+              <Route
+                exact
+                path={`/`}
+                render={() => <Main handleModal={handleModal} />}
+              />
+              <Route
+                exact
+                path={`/cart`}
+                render={() => <Cart navigateToStore={handleNavigateToStore} />}
+              />
+              <Route
+                exact
+                path={`/contact`}
+                render={() => <Contact navigateToCart={handleNavigateToCart} />}
+              />
+            </Switch>
+          </Suspense>
+        </div>
         <ToastContainer
           position="bottom-center"
           hideProgressBar={false}

@@ -3,8 +3,12 @@ import useDropdownMenu from "react-accessible-dropdown-menu-hook";
 
 import "./SkipTo.scss";
 
-const SkipTo = () => {
-  const { buttonProps, itemProps, isOpen } = useDropdownMenu(2);
+interface PropsInterface {
+  handleSkip: () => void;
+}
+
+const SkipTo: React.FC<PropsInterface> = ({ handleSkip }) => {
+  const { buttonProps, itemProps, isOpen } = useDropdownMenu(1);
 
   return (
     <>
@@ -15,11 +19,8 @@ const SkipTo = () => {
         className={`accessible-menu ${isOpen ? "visible" : ""} `}
         role="menu"
       >
-        <a {...itemProps[0]} href="/#">
-          Store
-        </a>
-        <a {...itemProps[1]} href="/#cart">
-          Cart
+        <a {...itemProps[0]} href="#content" onKeyPress={handleSkip}>
+          Content
         </a>
       </div>
     </>
