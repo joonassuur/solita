@@ -1,5 +1,6 @@
 import React, { useEffect, lazy, Suspense, useRef } from "react";
 import { useDispatch } from "react-redux";
+import ReactModal from "react-modal";
 import { Route, Switch, useHistory } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { ToastProvider } from "react-toast-notifications";
@@ -33,6 +34,10 @@ function App() {
   };
 
   useEffect(() => {
+    //Required by ReactModal plugin. Set app element, so the modal would know which elements to ignore if tab is pressed when modal is active.
+    ReactModal.setAppElement('body')
+    
+    // fetch store data at app startup
     dispatch(fetchStoreData());
   }, [dispatch]);
 
