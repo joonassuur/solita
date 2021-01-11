@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getCart } from "../../redux/Index";
 import StoreItems from "../store-items/StoreItems";
@@ -6,11 +6,15 @@ import StoreItems from "../store-items/StoreItems";
 import "./Cart.scss";
 
 function Cart({
-  navigateToStore
+  navigateToStore,
 }: {
   navigateToStore: React.MouseEventHandler;
 }) {
   const { cartQuantity, cartTotalCost } = useSelector(getCart);
+
+  useEffect(() => {
+    document.title ="whee web store - Cart"
+  }, []);
 
   return (
     <div id="cart">
@@ -18,7 +22,9 @@ function Cart({
       <div id="cart-content">
         {StoreItems("remove", "Remove from cart", "cart")}
         {cartQuantity > 0 && (
-          <h1 id="total-amount">Total: {cartTotalCost} €</h1>
+          <h1 tabIndex={0} id="total-amount">
+            Total: {cartTotalCost} €
+          </h1>
         )}
         <button id="backToStoreBtn" onClick={navigateToStore}>
           Back to store

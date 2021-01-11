@@ -1,0 +1,45 @@
+@import "../../variables.scss";
+
+#skipto {
+  z-index: 98;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border: 0;
+  padding: 0;
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  overflow: hidden;
+  &:focus {
+    width: inherit;
+    height: inherit;
+    padding: 0.6em 2em;
+    font-size: 1.5em;
+  }
+}
+
+.accessible-menu {
+  display: none;
+  background: #fff;
+  overflow: hidden;
+  padding: 0.6em 2em;
+  z-index: 98;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid $colorDark;
+  a {
+    display: block;
+    color: #000;
+    font-size: 1.5em;
+    margin: 0 0.2em;
+    color: palevioletred;
+    text-decoration: none;
+  }
+  &.visible {
+    display: block;
+  }
+}

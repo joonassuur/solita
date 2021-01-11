@@ -59,19 +59,30 @@ function StoreItems(
     return (
       <div key={product.id} className="storeItem">
         <div
+          tabIndex={0}
           title={product.name}
           className={`image ${product.name.toLowerCase()}`}
         ></div>
         <div className="item-details">
           <div className="name-price">
-            <h1 className="product-name">{product.name}</h1>
-            <h1 className="product-price">{`${product.price} €`}</h1>
+            <h1 className="product-name" tabIndex={0}>
+              {product.name}
+            </h1>
+            <h1
+              className="product-price"
+              tabIndex={0}
+            >{`${product.price} €`}</h1>
           </div>
           <div className="desc-btn-quantity">
-            <div className="product-desc">{product.description}</div>
+            <div className="product-desc" tabIndex={0}>
+              {product.description}
+            </div>
             <div className="quantity-btn">
               {renderElement === "cart" && (
-                <h3 className="product-quantity">{`Quantity: ${quantity}`}</h3>
+                <h3
+                  className="product-quantity"
+                  tabIndex={0}
+                >{`Quantity: ${quantity}`}</h3>
               )}
               <button
                 className="addRemove-btn"
