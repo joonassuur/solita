@@ -18,7 +18,7 @@ export const getCart = (state: {
   // calculate total cost of all items in a cart
   const cartTotalCost: number = Object.values(cart).reduce(
     (subTotal, cartItem) => {
-      products.map((product) => {
+      products.forEach((product) => {
         if (cartItem.id === product.id) {
           subTotal += product.price * cartItem.quantity;
         }
