@@ -4,21 +4,14 @@ import products from "../mockedAPI/products.json";
 export const fetchStoreData = createAsyncThunk(
   "@app: fetchStoreData",
   async () => {
-    if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
-      // fake the api call for development mode
-      const res = products;
-      return res;
-    } else {
-      // for production
-      const res = await fetch("/api/products");
-      const toJson = await res.json();
-      return toJson;
-    }
+    // fake the api call
+    const res = products;
+    return res;
   }
 );
-export const modifyCart = createAction("@app: modifyCart", item => {
+export const modifyCart = createAction("@app: modifyCart", (item) => {
   return { payload: item };
 });
-export const toggleModal = createAction("@app: toggleModal", isOpen => {
+export const toggleModal = createAction("@app: toggleModal", (isOpen) => {
   return { payload: isOpen };
 });
