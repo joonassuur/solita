@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "30af99e8065ac4f23ed614a89cd6dc7d",
+    "revision": "f22f13f22f9d900e70a968c406523fec",
     "url": "/whee-web-store/index.html"
   },
   {
@@ -24,7 +24,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/whee-web-store/static/css/7.8819dd87.chunk.css"
   },
   {
-    "revision": "ffb501e287a86581ee20",
+    "revision": "d2fbfe9f3dbaf3dfa2c3",
     "url": "/whee-web-store/static/css/main.fb7b4e3b.chunk.css"
   },
   {
@@ -60,8 +60,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/whee-web-store/static/js/7.3f01db73.chunk.js"
   },
   {
-    "revision": "ffb501e287a86581ee20",
-    "url": "/whee-web-store/static/js/main.ff7ee249.chunk.js"
+    "revision": "d2fbfe9f3dbaf3dfa2c3",
+    "url": "/whee-web-store/static/js/main.f24c7d4f.chunk.js"
   },
   {
     "revision": "b2fc123c9e7b2d536b70",
